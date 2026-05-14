@@ -4,6 +4,17 @@
  */
 package esport.turnamen;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import esport.config.Koneksi; // Memanggil class Koneksi buatanmu
+import esport.main.DashboardUtama;
+
 /**
  *
  * @author ACER
@@ -17,6 +28,56 @@ public class FrameTurnamen extends javax.swing.JFrame {
      */
     public FrameTurnamen() {
         initComponents();
+        loadData(); // Menampilkan data tabel saat frame dibuka
+        kosongkanForm(); // Memastikan form bersih saat frame dibuka
+        txtIdTurnamen.setEditable(false); // Kunci text field ID karena Auto Increment
+    }
+    
+    private void kosongkanForm() {
+        txtIdTurnamen.setText("");
+        txtNamaTurnamen.setText("");
+        cmbGame.setSelectedIndex(0);
+        cmbStatus.setSelectedIndex(0);
+        
+        // Mengembalikan JDateChooser ke tanggal saat ini (hari ini)
+        dateMulai.setDate(new java.util.Date());
+        dateSelesai.setDate(new java.util.Date());
+    }
+
+    // Method untuk menarik data dari database ke Tabel JTable
+    private void loadData() {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Nama Turnamen");
+        model.addColumn("Game");
+        model.addColumn("Tanggal Mulai");
+        model.addColumn("Tanggal Selesai");
+        model.addColumn("Status");
+
+        try {
+            String sql = "SELECT * FROM tb_turnamen";
+            
+            // Memanggil koneksi sesuai gaya codingmu di Koneksi.java
+            Koneksi kon = new Koneksi(); 
+            Connection conn = kon.conn;
+            
+            Statement stm = conn.createStatement();
+            ResultSet res = stm.executeQuery(sql);
+
+            while (res.next()) {
+                model.addRow(new Object[]{
+                    res.getString("id_turnamen"),
+                    res.getString("nama_turnamen"),
+                    res.getString("game"),
+                    res.getString("tgl_mulai"),
+                    res.getString("tgl_selesai"),
+                    res.getString("status")
+                });
+            }
+            tblTurnamen.setModel(model); // Pastikan nama variabel tabel kamu 'tblTurnamen'
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat data: " + e.getMessage());
+        }
     }
 
     /**
@@ -28,47 +89,426 @@ public class FrameTurnamen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jDatePickerUtil1 = new org.jdatepicker.util.JDatePickerUtil();
+        jDatePickerUtil2 = new org.jdatepicker.util.JDatePickerUtil();
+        jDatePickerUtil3 = new org.jdatepicker.util.JDatePickerUtil();
+        jDatePickerUtil4 = new org.jdatepicker.util.JDatePickerUtil();
+        jDatePickerUtil5 = new org.jdatepicker.util.JDatePickerUtil();
+        utilCalendarModel1 = new org.jdatepicker.impl.UtilCalendarModel();
+        dateComponentFormatter1 = new org.jdatepicker.impl.DateComponentFormatter();
+        jDateComponentFactory1 = new org.jdatepicker.JDateComponentFactory();
+        jDateComponentFactory2 = new org.jdatepicker.JDateComponentFactory();
+        jDatePickerUtil6 = new org.jdatepicker.util.JDatePickerUtil();
+        jDialog1 = new javax.swing.JDialog();
+        jDatePickerUtil7 = new org.jdatepicker.util.JDatePickerUtil();
+        sqlDateModel1 = new org.jdatepicker.impl.SqlDateModel();
+        utilCalendarModel2 = new org.jdatepicker.impl.UtilCalendarModel();
+        jDatePickerUtil8 = new org.jdatepicker.util.JDatePickerUtil();
+        jDatePickerUtil9 = new org.jdatepicker.util.JDatePickerUtil();
+        jDatePickerUtil10 = new org.jdatepicker.util.JDatePickerUtil();
+        jDatePickerUtil11 = new org.jdatepicker.util.JDatePickerUtil();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtNamaTurnamen = new javax.swing.JTextField();
+        txtIdTurnamen = new javax.swing.JTextField();
+        cmbGame = new javax.swing.JComboBox<>();
+        btnHapus = new javax.swing.JButton();
+        btnBatal = new javax.swing.JButton();
+        dateMulai = new com.toedter.calendar.JCalendar();
+        dateSelesai = new com.toedter.calendar.JCalendar();
+        btnUbah = new javax.swing.JButton();
+        btnSimpan = new javax.swing.JButton();
+        cmbStatus = new javax.swing.JComboBox<>();
+        btnKembali = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblTurnamen = new javax.swing.JTable();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 600));
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel1.setText("MASTER DATA TURNAMEN");
+
+        jLabel2.setText("ID Turnamen :");
+
+        jLabel3.setText("Nama Turnamen :");
+
+        jLabel4.setText("Game :");
+
+        jLabel5.setText("Tanggal Mulai :");
+
+        jLabel6.setText("Tanggal Selesai :");
+
+        jLabel7.setText("Status :");
+
+        cmbGame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mobil Legend", "Free Fire", "Valorant", "PUBG" }));
+
+        btnHapus.setText("HAPUS");
+        btnHapus.addActionListener(this::btnHapusActionPerformed);
+
+        btnBatal.setText("BATAL");
+        btnBatal.addActionListener(this::btnBatalActionPerformed);
+
+        btnUbah.setText("UBAH");
+        btnUbah.addActionListener(this::btnUbahActionPerformed);
+
+        btnSimpan.setText("SIMPAN");
+        btnSimpan.addActionListener(this::btnSimpanActionPerformed);
+
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendaftaran Buka", "Berjalan", "Selesai", " " }));
+
+        btnKembali.setText("KEMBALI");
+        btnKembali.addActionListener(this::btnKembaliActionPerformed);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(cmbGame, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(122, 122, 122))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(dateMulai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(dateSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtNamaTurnamen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(txtIdTurnamen, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnSimpan)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnUbah)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnHapus)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBatal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnKembali)))))
+                .addGap(18, 18, 18))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtIdTurnamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtNamaTurnamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(cmbGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(dateMulai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUbah)
+                    .addComponent(btnBatal)
+                    .addComponent(btnHapus)
+                    .addComponent(btnSimpan)
+                    .addComponent(btnKembali))
+                .addGap(49, 49, 49))
+        );
+
+        tblTurnamen.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nama Turnamen", "Game", "Status"
+            }
+        ));
+        tblTurnamen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTurnamenMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblTurnamen);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(400, 400, 400)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (txtIdTurnamen.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Pilih data turnamen di tabel yang akan diubah!");
+                return;
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String tglMulai = sdf.format(dateMulai.getDate());
+            String tglSelesai = sdf.format(dateSelesai.getDate());
+
+            String sql = "UPDATE tb_turnamen SET nama_turnamen=?, game=?, tgl_mulai=?, tgl_selesai=?, status=? WHERE id_turnamen=?";
+            
+            Koneksi kon = new Koneksi();
+            Connection conn = kon.conn;
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setString(1, txtNamaTurnamen.getText());
+            pst.setString(2, cmbGame.getSelectedItem().toString());
+            pst.setString(3, tglMulai);
+            pst.setString(4, tglSelesai);
+            pst.setString(5, cmbStatus.getSelectedItem().toString());
+            pst.setString(6, txtIdTurnamen.getText());
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Data Turnamen Berhasil Diubah!");
+
+            loadData();
+            kosongkanForm();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal mengubah data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnUbahActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (txtIdTurnamen.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Pilih data turnamen di tabel yang akan dihapus!");
+                return;
+            }
+
+            // Pesan konfirmasi sebelum hapus
+            int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus turnamen ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+            
+            if (confirm == JOptionPane.YES_OPTION) {
+                String sql = "DELETE FROM tb_turnamen WHERE id_turnamen=?";
+                
+                Koneksi kon = new Koneksi();
+                Connection conn = kon.conn;
+                PreparedStatement pst = conn.prepareStatement(sql);
+
+                pst.setString(1, txtIdTurnamen.getText());
+                pst.executeUpdate();
+                
+                JOptionPane.showMessageDialog(this, "Data Turnamen Berhasil Dihapus!");
+                loadData();
+                kosongkanForm();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal menghapus data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        // TODO add your handling code here:
+        kosongkanForm();
+    }//GEN-LAST:event_btnBatalActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        // TODO add your handling code here:
+        try {
+            // Validasi jangan sampai ada yang kosong
+            if (txtNamaTurnamen.getText().isEmpty() || dateMulai.getDate() == null || dateSelesai.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Harap lengkapi semua data!");
+                return;
+            }
+
+            // Ubah format tanggal dari JDateChooser ke format MySQL (YYYY-MM-DD)
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String tglMulai = sdf.format(dateMulai.getDate());
+            String tglSelesai = sdf.format(dateSelesai.getDate());
+
+            // Query Insert (ID Turnamen tidak dimasukkan karena Auto Increment)
+            String sql = "INSERT INTO tb_turnamen (nama_turnamen, game, tgl_mulai, tgl_selesai, status) VALUES (?, ?, ?, ?, ?)";
+            
+            Koneksi kon = new Koneksi();
+            Connection conn = kon.conn;
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setString(1, txtNamaTurnamen.getText());
+            pst.setString(2, cmbGame.getSelectedItem().toString());
+            pst.setString(3, tglMulai);
+            pst.setString(4, tglSelesai);
+            pst.setString(5, cmbStatus.getSelectedItem().toString());
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Data Turnamen Berhasil Disimpan!");
+
+            loadData(); // Refresh tabel
+            kosongkanForm(); // Bersihkan form
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void tblTurnamenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTurnamenMouseClicked
+        // TODO add your handling code here:
+        int baris = tblTurnamen.rowAtPoint(evt.getPoint());
+        if (baris != -1) {
+            txtIdTurnamen.setText(tblTurnamen.getValueAt(baris, 0).toString());
+            txtNamaTurnamen.setText(tblTurnamen.getValueAt(baris, 1).toString());
+            cmbGame.setSelectedItem(tblTurnamen.getValueAt(baris, 2).toString());
+            cmbStatus.setSelectedItem(tblTurnamen.getValueAt(baris, 5).toString());
+
+            try {
+                // Kembalikan format string dari tabel ke tipe Date untuk JDateChooser
+                java.util.Date dateM = new SimpleDateFormat("yyyy-MM-dd").parse(tblTurnamen.getValueAt(baris, 3).toString());
+                dateMulai.setDate(dateM);
+
+                java.util.Date dateS = new SimpleDateFormat("yyyy-MM-dd").parse(tblTurnamen.getValueAt(baris, 4).toString());
+                dateSelesai.setDate(dateS);
+            } catch (Exception e) {
+                System.out.println("Gagal parse tanggal: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_tblTurnamenMouseClicked
+
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+        // TODO add your handling code here:
+        // Membuka frame DashboardUtama
+        DashboardUtama dashboard = new DashboardUtama();
+        dashboard.setVisible(true);
+        dashboard.setLocationRelativeTo(null); // Agar dashboard muncul tepat di tengah layar
+        
+        // Menutup FrameTurnamen yang sedang terbuka saat ini
+        this.dispose();
+    }//GEN-LAST:event_btnKembaliActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            // Mengubah tema menjadi mirip Windows / OS bawaan
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(FrameTurnamen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrameTurnamen().setVisible(true));
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FrameTurnamen().setVisible(true); // Ganti nama frame-nya sesuai dengan nama file kamu
+            }
+        });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBatal;
+    private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btnKembali;
+    private javax.swing.JButton btnSimpan;
+    private javax.swing.JButton btnUbah;
+    private javax.swing.JComboBox<String> cmbGame;
+    private javax.swing.JComboBox<String> cmbStatus;
+    private org.jdatepicker.impl.DateComponentFormatter dateComponentFormatter1;
+    private com.toedter.calendar.JCalendar dateMulai;
+    private com.toedter.calendar.JCalendar dateSelesai;
+    private org.jdatepicker.JDateComponentFactory jDateComponentFactory1;
+    private org.jdatepicker.JDateComponentFactory jDateComponentFactory2;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil10;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil11;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil2;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil3;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil4;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil5;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil6;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil7;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil8;
+    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil9;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private org.jdatepicker.impl.SqlDateModel sqlDateModel1;
+    private javax.swing.JTable tblTurnamen;
+    private javax.swing.JTextField txtIdTurnamen;
+    private javax.swing.JTextField txtNamaTurnamen;
+    private org.jdatepicker.impl.UtilCalendarModel utilCalendarModel1;
+    private org.jdatepicker.impl.UtilCalendarModel utilCalendarModel2;
     // End of variables declaration//GEN-END:variables
 }
