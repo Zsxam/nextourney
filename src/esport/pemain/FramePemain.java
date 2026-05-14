@@ -4,6 +4,12 @@
  */
 package esport.pemain;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
+import esport.config.Koneksi; // Sesuaikan dengan lokasi file koneksimu
 /**
  *
  * @author ACER
@@ -11,13 +17,55 @@ package esport.pemain;
 public class FramePemain extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FramePemain.class.getName());
+    private void tampilData() {
+    Object header[] = {"ID Pemain", "Tim Asal", "Nickname", "Role", "Nama Asli"};
+    DefaultTableModel data = new DefaultTableModel(null, header);
+    tblPemain.setModel(data);
+    
+    
+    try {
+        Koneksi kon = new Koneksi();
+        Statement st = kon.conn.createStatement();
+        
+        // QUERY JOIN: Menggabungkan tb_pemain dan tb_tim
+        String sql = "SELECT p.id_pemain, t.nama_tim, p.nickname, p.role_pemain, p.nama_asli " +
+                     "FROM tb_pemain p JOIN tb_tim t ON p.id_tim = t.id_tim " +
+                     "ORDER BY p.id_pemain DESC";
+                     
+        ResultSet rs = st.executeQuery(sql);
+        
+        while (rs.next()) {
+            data.addRow(new Object[]{
+                rs.getString("id_pemain"),
+                rs.getString("nama_tim"),
+                rs.getString("nickname"),
+                rs.getString("role_pemain"),
+                rs.getString("nama_asli")
+            });
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Gagal Tampil Data: " + e.getMessage());
+    }
+}
 
+        private void kosongkanForm() {
+        txtIdPemain.setText("");
+        cmbTim.setSelectedIndex(0); // Kembali ke "- Pilih Tim -"
+        txtNickname.setText("");
+        cmbRole.setSelectedIndex(0);
+        txtNamaAsli.setText("");
+    }
     /**
      * Creates new form FramePemain
      */
     public FramePemain() {
         initComponents();
-    }
+        this.setLocationRelativeTo(null); // Biar posisi di tengah layar
+    
+        tampilData();   // Panggil tabel
+        loadComboTim();
+        
+    }       
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,21 +76,384 @@ public class FramePemain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtIdPemain = new javax.swing.JTextField();
+        txtNickname = new javax.swing.JTextField();
+        txtNamaAsli = new javax.swing.JTextField();
+        cmbTim = new javax.swing.JComboBox<>();
+        cmbRole = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPemain = new javax.swing.JTable();
+        btnSimpan = new javax.swing.JButton();
+        btnUbah = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
+        btnBatal = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnKembali = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel1.setText("MANAJEMEN ROASTER PEMAIN");
+
+        jLabel6.setText("ID Pemain");
+
+        jLabel7.setText("Tim Asal");
+
+        jLabel8.setText("Nickname");
+
+        jLabel9.setText("Role Pemain");
+
+        jLabel11.setText("Nama Asli");
+
+        txtNickname.addActionListener(this::txtNicknameActionPerformed);
+
+        cmbTim.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cmbTim.addActionListener(this::cmbTimActionPerformed);
+
+        cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JUNGLER", "ROAMER", "GOLD LANER", "EXP LANER", "MID LANER", " " }));
+
+        tblPemain.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Tim Asal", "Nickname", "Role"
+            }
+        ));
+        tblPemain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPemainMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblPemain);
+
+        btnSimpan.setText("SIMPAN");
+        btnSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSimpanMouseClicked(evt);
+            }
+        });
+
+        btnUbah.setText("UBAH");
+        btnUbah.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUbahMouseClicked(evt);
+            }
+        });
+
+        btnHapus.setText("HAPUS");
+        btnHapus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHapusMouseClicked(evt);
+            }
+        });
+
+        btnBatal.setText("BATAL");
+        btnBatal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBatalMouseClicked(evt);
+            }
+        });
+        btnBatal.addActionListener(this::btnBatalActionPerformed);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSimpan)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel11)))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbTim, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdPemain, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNamaAsli, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnUbah)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnHapus)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnBatal)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtIdPemain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cmbTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtNamaAsli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSimpan)
+                    .addComponent(btnUbah)
+                    .addComponent(btnHapus)
+                    .addComponent(btnBatal))
+                .addGap(35, 35, 35))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
+
+        btnKembali.setText("KEMBALI KE DASHBOARD");
+        btnKembali.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnKembaliMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnKembali)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(20, 20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnKembali)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loadComboTim() {
+        cmbTim.removeAllItems(); // Kosongkan dulu isi combobox
+        cmbTim.addItem("- Pilih Tim -"); // Opsi default
+
+        try {
+            Koneksi kon = new Koneksi();
+            java.sql.Statement st = kon.conn.createStatement();
+            String sql = "SELECT nama_tim FROM tb_tim ORDER BY nama_tim ASC";
+            java.sql.ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                cmbTim.addItem(rs.getString("nama_tim"));
+            }
+        } catch (Exception e) {
+            System.out.println("Gagal Load Combo: " + e.getMessage());
+        }
+    }
+    
+    
+    private void cmbTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTimActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_cmbTimActionPerformed
+
+    private void tblPemainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPemainMouseClicked
+        // TODO add your handling code here:
+        int baris = tblPemain.getSelectedRow();
+    
+        // Mengecek jika ada baris yang diklik
+        if (baris != -1) {
+            txtIdPemain.setText(tblPemain.getValueAt(baris, 0).toString());
+            cmbTim.setSelectedItem(tblPemain.getValueAt(baris, 1).toString());
+            txtNickname.setText(tblPemain.getValueAt(baris, 2).toString());
+            cmbRole.setSelectedItem(tblPemain.getValueAt(baris, 3).toString());
+            txtNamaAsli.setText(tblPemain.getValueAt(baris, 4).toString());
+        }
+    }//GEN-LAST:event_tblPemainMouseClicked
+
+    private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
+        // TODO add your handling code here:
+        String namaTimDipilih = cmbTim.getSelectedItem().toString();
+        String nickname = txtNickname.getText();
+        String role = cmbRole.getSelectedItem().toString();
+        String namaAsli = txtNamaAsli.getText();
+
+        if (namaTimDipilih.equals("- Pilih Tim -") || nickname.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Pilih tim dan isi nickname terlebih dahulu!");
+            return;
+        }
+
+        try {
+            Koneksi kon = new Koneksi();
+            Statement st = kon.conn.createStatement();
+
+            // 1. Cari id_tim berdasarkan nama_tim yang dipilih di ComboBox
+            String cariIdTim = "SELECT id_tim FROM tb_tim WHERE nama_tim = '" + namaTimDipilih + "'";
+            ResultSet rs = st.executeQuery(cariIdTim);
+
+            if (rs.next()) {
+                String idTim = rs.getString("id_tim");
+
+                // 2. Lakukan proses Insert menggunakan id_tim tersebut
+                String sqlInsert = "INSERT INTO tb_pemain (id_tim, nickname, role_pemain, nama_asli) " +
+                                   "VALUES ('" + idTim + "', '" + nickname + "', '" + role + "', '" + namaAsli + "')";
+
+                st.executeUpdate(sqlInsert);
+                JOptionPane.showMessageDialog(null, "Data Pemain Berhasil Disimpan!");
+
+                tampilData(); // Refresh tabel
+                // Opsional: Buat method kosongkanForm() dan panggil di sini
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Gagal Simpan: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSimpanMouseClicked
+
+    private void btnBatalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatalMouseClicked
+        // TODO add your handling code here:
+        kosongkanForm();
+    }//GEN-LAST:event_btnBatalMouseClicked
+
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBatalActionPerformed
+
+    private void btnHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMouseClicked
+        // TODO add your handling code here:
+        String id = txtIdPemain.getText();
+    
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Pilih data di tabel terlebih dahulu!");
+            return;
+        }
+
+        int konfirmasi = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus pemain ini?", "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
+
+        if (konfirmasi == JOptionPane.YES_OPTION) {
+            try {
+                Koneksi kon = new Koneksi();
+                java.sql.Statement st = kon.conn.createStatement();
+                String sql = "DELETE FROM tb_pemain WHERE id_pemain = '" + id + "'";
+                st.executeUpdate(sql);
+
+                JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus!");
+                tampilData(); // Refresh tabel
+                kosongkanForm(); // Bersihkan form
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Gagal Menghapus: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnHapusMouseClicked
+
+    private void btnUbahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUbahMouseClicked
+        // TODO add your handling code here:
+        String id = txtIdPemain.getText();
+        String namaTimDipilih = cmbTim.getSelectedItem().toString();
+        String nickname = txtNickname.getText();
+        String role = cmbRole.getSelectedItem().toString();
+        String namaAsli = txtNamaAsli.getText();
+
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Pilih data di tabel terlebih dahulu!");
+            return;
+        }
+        if (namaTimDipilih.equals("- Pilih Tim -") || nickname.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Data tidak boleh kosong!");
+            return;
+        }
+
+        try {
+            Koneksi kon = new Koneksi();
+            java.sql.Statement st = kon.conn.createStatement();
+
+            // 1. Cari id_tim yang baru berdasarkan combobox
+            String cariIdTim = "SELECT id_tim FROM tb_tim WHERE nama_tim = '" + namaTimDipilih + "'";
+            java.sql.ResultSet rs = st.executeQuery(cariIdTim);
+
+            if (rs.next()) {
+                String idTimBaru = rs.getString("id_tim");
+
+                // 2. Lakukan proses UPDATE
+                String sqlUpdate = "UPDATE tb_pemain SET "
+                                 + "id_tim = '" + idTimBaru + "', "
+                                 + "nickname = '" + nickname + "', "
+                                 + "role_pemain = '" + role + "', "
+                                 + "nama_asli = '" + namaAsli + "' "
+                                 + "WHERE id_pemain = '" + id + "'";
+
+                st.executeUpdate(sqlUpdate);
+                JOptionPane.showMessageDialog(this, "Data Berhasil Diubah!");
+
+                tampilData(); // Refresh tabel
+                kosongkanForm(); // Bersihkan form
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal Mengubah: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnUbahMouseClicked
+
+    private void txtNicknameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNicknameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNicknameActionPerformed
+
+    private void btnKembaliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKembaliMouseClicked
+        // TODO add your handling code here:
+        int pilihan = javax.swing.JOptionPane.showConfirmDialog(this, 
+            "Kembali ke Menu Utama?", 
+            "Konfirmasi", 
+            javax.swing.JOptionPane.YES_NO_OPTION);
+            
+        if (pilihan == javax.swing.JOptionPane.YES_OPTION) {
+            new esport.main.DashboardUtama().setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnKembaliMouseClicked
 
     /**
      * @param args the command line arguments
@@ -70,5 +481,25 @@ public class FramePemain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBatal;
+    private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btnKembali;
+    private javax.swing.JButton btnSimpan;
+    private javax.swing.JButton btnUbah;
+    private javax.swing.JComboBox<String> cmbRole;
+    private javax.swing.JComboBox<String> cmbTim;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable tblPemain;
+    private javax.swing.JTextField txtIdPemain;
+    private javax.swing.JTextField txtNamaAsli;
+    private javax.swing.JTextField txtNickname;
     // End of variables declaration//GEN-END:variables
 }
