@@ -90,24 +90,7 @@ public class FrameTurnamen extends javax.swing.JFrame {
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
-        jDatePickerUtil1 = new org.jdatepicker.util.JDatePickerUtil();
-        jDatePickerUtil2 = new org.jdatepicker.util.JDatePickerUtil();
-        jDatePickerUtil3 = new org.jdatepicker.util.JDatePickerUtil();
-        jDatePickerUtil4 = new org.jdatepicker.util.JDatePickerUtil();
-        jDatePickerUtil5 = new org.jdatepicker.util.JDatePickerUtil();
-        utilCalendarModel1 = new org.jdatepicker.impl.UtilCalendarModel();
-        dateComponentFormatter1 = new org.jdatepicker.impl.DateComponentFormatter();
-        jDateComponentFactory1 = new org.jdatepicker.JDateComponentFactory();
-        jDateComponentFactory2 = new org.jdatepicker.JDateComponentFactory();
-        jDatePickerUtil6 = new org.jdatepicker.util.JDatePickerUtil();
         jDialog1 = new javax.swing.JDialog();
-        jDatePickerUtil7 = new org.jdatepicker.util.JDatePickerUtil();
-        sqlDateModel1 = new org.jdatepicker.impl.SqlDateModel();
-        utilCalendarModel2 = new org.jdatepicker.impl.UtilCalendarModel();
-        jDatePickerUtil8 = new org.jdatepicker.util.JDatePickerUtil();
-        jDatePickerUtil9 = new org.jdatepicker.util.JDatePickerUtil();
-        jDatePickerUtil10 = new org.jdatepicker.util.JDatePickerUtil();
-        jDatePickerUtil11 = new org.jdatepicker.util.JDatePickerUtil();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -477,22 +460,8 @@ public class FrameTurnamen extends javax.swing.JFrame {
     private javax.swing.JButton btnUbah;
     private javax.swing.JComboBox<String> cmbGame;
     private javax.swing.JComboBox<String> cmbStatus;
-    private org.jdatepicker.impl.DateComponentFormatter dateComponentFormatter1;
     private com.toedter.calendar.JCalendar dateMulai;
     private com.toedter.calendar.JCalendar dateSelesai;
-    private org.jdatepicker.JDateComponentFactory jDateComponentFactory1;
-    private org.jdatepicker.JDateComponentFactory jDateComponentFactory2;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil10;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil11;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil2;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil3;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil4;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil5;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil6;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil7;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil8;
-    private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil9;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -504,11 +473,8 @@ public class FrameTurnamen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane2;
-    private org.jdatepicker.impl.SqlDateModel sqlDateModel1;
     private javax.swing.JTable tblTurnamen;
     private javax.swing.JTextField txtIdTurnamen;
     private javax.swing.JTextField txtNamaTurnamen;
-    private org.jdatepicker.impl.UtilCalendarModel utilCalendarModel1;
-    private org.jdatepicker.impl.UtilCalendarModel utilCalendarModel2;
     // End of variables declaration//GEN-END:variables
 }
