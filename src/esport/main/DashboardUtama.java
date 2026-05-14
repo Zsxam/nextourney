@@ -19,6 +19,7 @@ public class DashboardUtama extends javax.swing.JFrame {
      */
     public DashboardUtama() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
