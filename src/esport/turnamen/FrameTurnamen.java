@@ -125,7 +125,6 @@ public class FrameTurnamen extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setText("MASTER DATA TURNAMEN");
@@ -142,7 +141,7 @@ public class FrameTurnamen extends javax.swing.JFrame {
 
         jLabel7.setText("Status :");
 
-        cmbGame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mobil Legend", "Free Fire", "Valorant", "PUBG" }));
+        cmbGame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mobile Legend", "Free Fire", "Valorant", "PUBG" }));
 
         btnHapus.setText("HAPUS");
         btnHapus.addActionListener(this::btnHapusActionPerformed);
