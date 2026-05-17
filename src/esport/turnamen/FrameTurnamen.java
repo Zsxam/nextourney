@@ -142,6 +142,7 @@ public class FrameTurnamen extends javax.swing.JFrame {
         jLabel7.setText("Status :");
 
         cmbGame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mobile Legend", "Free Fire", "Valorant", "PUBG" }));
+        cmbGame.addActionListener(this::cmbGameActionPerformed);
 
         btnHapus.setText("HAPUS");
         btnHapus.addActionListener(this::btnHapusActionPerformed);
@@ -433,6 +434,10 @@ public class FrameTurnamen extends javax.swing.JFrame {
         // Menutup FrameTurnamen yang sedang terbuka saat ini
         this.dispose();
     }//GEN-LAST:event_btnKembaliActionPerformed
+
+    private void cmbGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbGameActionPerformed
 
     /**
      * @param args the command line arguments

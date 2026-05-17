@@ -118,6 +118,7 @@ public class FramePemain extends javax.swing.JFrame {
         cmbTim.addActionListener(this::cmbTimActionPerformed);
 
         cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JUNGLER", "ROAMER", "GOLD LANER", "EXP LANER", "MID LANER", " " }));
+        cmbRole.addActionListener(this::cmbRoleActionPerformed);
 
         tblPemain.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -454,6 +455,10 @@ public class FramePemain extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnKembaliMouseClicked
+
+    private void cmbRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRoleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbRoleActionPerformed
 
     /**
      * @param args the command line arguments
