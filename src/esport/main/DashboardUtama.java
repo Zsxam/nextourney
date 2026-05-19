@@ -32,27 +32,67 @@ public class DashboardUtama extends javax.swing.JFrame {
     private void initComponents() {
 
         lblJudul = new javax.swing.JLabel();
-        panelMenu = new javax.swing.JPanel();
-        btnMenuTurnamen = new javax.swing.JButton();
-        btnMenuPemain = new javax.swing.JButton();
-        btnMenuTim = new javax.swing.JButton();
-        btnMenuRegistrasi = new javax.swing.JButton();
-        btnMenuMatch = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         btnKeluar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btnMenuTurnamen = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        btnMenuTim = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        btnMenuMatch = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        btnMenuRegistrasi = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        btnMenuPemain = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dashboard Nextourney");
+        setMinimumSize(new java.awt.Dimension(900, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblJudul.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        lblJudul.setText("SISTEM MANAJEMEN TURNAMEN E-SPORTS");
+        lblJudul.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        lblJudul.setText("NEXTOURNEY");
+        getContentPane().add(lblJudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
 
-        btnMenuTurnamen.setText("KELOLA TURNAMEN");
+        btnKeluar.setBackground(new java.awt.Color(217, 4, 22));
+        btnKeluar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnKeluar.setForeground(new java.awt.Color(255, 255, 255));
+        btnKeluar.setText("KELUAR");
+        btnKeluar.setContentAreaFilled(false);
+        btnKeluar.setOpaque(true);
+        btnKeluar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnKeluarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnKeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 530, 100, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esport/img/trophy-solid.png"))); // NOI18N
+
+        btnMenuTurnamen.setBackground(new java.awt.Color(217, 4, 22));
+        btnMenuTurnamen.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnMenuTurnamen.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenuTurnamen.setText("KELOLA");
+        btnMenuTurnamen.setContentAreaFilled(false);
+        btnMenuTurnamen.setOpaque(true);
         btnMenuTurnamen.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMenuTurnamenMouseClicked(evt);
@@ -60,158 +100,316 @@ public class DashboardUtama extends javax.swing.JFrame {
         });
         btnMenuTurnamen.addActionListener(this::btnMenuTurnamenActionPerformed);
 
-        btnMenuPemain.setText("MANAJEMEN ROSTER");
-        btnMenuPemain.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuPemainMouseClicked(evt);
-            }
-        });
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Turnamen");
 
-        btnMenuTim.setText("KELOLA DATA TIM");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setText("Kelola Data Turnamen"); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMenuTurnamen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(btnMenuTurnamen)
+                .addGap(20, 20, 20))
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esport/img/people-group-solid.png"))); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("Tim");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("Kelola Data Tim"); // NOI18N
+
+        btnMenuTim.setBackground(new java.awt.Color(217, 4, 22));
+        btnMenuTim.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnMenuTim.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenuTim.setText("KELOLA");
+        btnMenuTim.setContentAreaFilled(false);
+        btnMenuTim.setOpaque(true);
         btnMenuTim.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMenuTimMouseClicked(evt);
             }
         });
 
-        btnMenuRegistrasi.setText("REGISTRASI TIM");
-        btnMenuRegistrasi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMenuRegistrasiMouseClicked(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(65, 65, 65))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel9))
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnMenuTim, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(btnMenuTim)
+                .addGap(20, 20, 20))
+        );
 
-        btnMenuMatch.setText("JADWAL & HASIL MATCH");
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 175, -1));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esport/img/gamepad-solid.png"))); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel13.setText("Match");
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel14.setText("Kelola Match"); // NOI18N
+
+        btnMenuMatch.setBackground(new java.awt.Color(217, 4, 22));
+        btnMenuMatch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnMenuMatch.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenuMatch.setText("KELOLA");
+        btnMenuMatch.setContentAreaFilled(false);
+        btnMenuMatch.setOpaque(true);
         btnMenuMatch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMenuMatchMouseClicked(evt);
             }
         });
 
-        jLabel3.setText("Master Turnamen");
-
-        jLabel4.setText("Master Tim");
-
-        jLabel5.setText("Data Pemain Tim");
-
-        jLabel6.setText("Daftar ke Turnamen");
-
-        jLabel7.setText("Input Skor & Bracket");
-
-        javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
-        panelMenu.setLayout(panelMenuLayout);
-        panelMenuLayout.setHorizontalGroup(
-            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMenuLayout.createSequentialGroup()
-                .addGap(341, 341, 341)
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMenuMatch)
-                    .addGroup(panelMenuLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelMenuLayout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnMenuPemain)
-                            .addComponent(btnMenuTurnamen)
-                            .addGroup(panelMenuLayout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26))))
-                    .addGroup(panelMenuLayout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelMenuLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(btnMenuMatch, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel6)
-                        .addGap(195, 195, 195))
-                    .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
-                            .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnMenuTim)
-                                .addComponent(btnMenuRegistrasi))
-                            .addGap(177, 177, 177))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(211, 211, 211)))))
+                        .addComponent(jLabel13))
+                    .addComponent(jLabel12))
+                .addGap(45, 45, 45))
         );
-        panelMenuLayout.setVerticalGroup(
-            panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelMenuLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMenuTim)
-                    .addComponent(btnMenuTurnamen))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(105, 105, 105)
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnMenuPemain)
-                    .addComponent(btnMenuRegistrasi))
+                .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(46, 46, 46)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(btnMenuMatch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel2.setText("Administrator Dashboard");
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 175, -1));
 
-        btnKeluar.setText("KELUAR");
-        btnKeluar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esport/img/clipboard-regular.png"))); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel16.setText("Registrasi");
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel17.setText("Kelola Registrasi"); // NOI18N
+
+        btnMenuRegistrasi.setBackground(new java.awt.Color(217, 4, 22));
+        btnMenuRegistrasi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnMenuRegistrasi.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenuRegistrasi.setText("KELOLA");
+        btnMenuRegistrasi.setContentAreaFilled(false);
+        btnMenuRegistrasi.setOpaque(true);
+        btnMenuRegistrasi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnKeluarMouseClicked(evt);
+                btnMenuRegistrasiMouseClicked(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(lblJudul))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(308, 308, 308)
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnKeluar)
-                        .addGap(11, 11, 11)))
-                .addContainerGap(36, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel17)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(46, 46, 46))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addGap(43, 43, 43))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(btnMenuRegistrasi, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(lblJudul)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(3, 3, 3)
-                .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17)
                 .addGap(18, 18, 18)
-                .addComponent(btnKeluar)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addComponent(btnMenuRegistrasi)
+                .addGap(20, 20, 20))
         );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 175, -1));
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/esport/img/person-solid.png"))); // NOI18N
+
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel19.setText("Roster");
+
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel20.setText("Kelola Data Roster"); // NOI18N
+
+        btnMenuPemain.setBackground(new java.awt.Color(217, 4, 22));
+        btnMenuPemain.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnMenuPemain.setForeground(new java.awt.Color(255, 255, 255));
+        btnMenuPemain.setText("KELOLA");
+        btnMenuPemain.setContentAreaFilled(false);
+        btnMenuPemain.setOpaque(true);
+        btnMenuPemain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuPemainMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(54, 54, 54))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(43, 43, 43))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnMenuPemain, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel20)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(btnMenuPemain)
+                .addGap(20, 20, 20))
+        );
+
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 90, 175, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKeluarMouseClicked
+        // TODO add your handling code here:
+        int pilihan = javax.swing.JOptionPane.showConfirmDialog(this, 
+                "Apakah Anda yakin ingin keluar dari aplikasi?", 
+                "Konfirmasi Keluar", 
+                javax.swing.JOptionPane.YES_NO_OPTION);
+            
+        if (pilihan == javax.swing.JOptionPane.YES_OPTION) {
+            System.exit(0); // Menutup seluruh program
+        }
+    }//GEN-LAST:event_btnKeluarMouseClicked
+
+    private void btnMenuMatchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMatchMouseClicked
+        // TODO add your handling code here:
+        esport.match.FrameMatch frameMatch = new esport.match.FrameMatch();
+        frameMatch.setVisible(true);
+        frameMatch.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuMatchMouseClicked
+
+    private void btnMenuRegistrasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuRegistrasiMouseClicked
+        // TODO add your handling code here:
+        esport.registrasi.FrameRegistrasi frameRegistrasi = new esport.registrasi.FrameRegistrasi();
+        frameRegistrasi.setVisible(true);
+        frameRegistrasi.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuRegistrasiMouseClicked
+
+    private void btnMenuTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuTimMouseClicked
+        // TODO add your handling code here:
+        esport.tim.FrameTim frameTim = new esport.tim.FrameTim();
+        frameTim.setVisible(true);
+        frameTim.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnMenuTimMouseClicked
 
     private void btnMenuTurnamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuTurnamenActionPerformed
         // TODO add your handling code here:
@@ -225,49 +423,13 @@ public class DashboardUtama extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnMenuTurnamenMouseClicked
 
-    private void btnMenuTimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuTimMouseClicked
-        // TODO add your handling code here:
-        esport.tim.FrameTim frameTim = new esport.tim.FrameTim();
-        frameTim.setVisible(true);
-        frameTim.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnMenuTimMouseClicked
-
     private void btnMenuPemainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPemainMouseClicked
         // TODO add your handling code here:
         esport.pemain.FramePemain framePemain = new esport.pemain.FramePemain();
         framePemain.setVisible(true);
-        framePemain.setLocationRelativeTo(null);
+        framePemain.setLocationRelativeTo(null); // Membuat frame muncul di tengah layar
         this.dispose();
     }//GEN-LAST:event_btnMenuPemainMouseClicked
-
-    private void btnMenuRegistrasiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuRegistrasiMouseClicked
-        // TODO add your handling code here:
-        esport.registrasi.FrameRegistrasi frameRegistrasi = new esport.registrasi.FrameRegistrasi();
-        frameRegistrasi.setVisible(true);
-        frameRegistrasi.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnMenuRegistrasiMouseClicked
-
-    private void btnMenuMatchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMatchMouseClicked
-        // TODO add your handling code here:
-        esport.match.FrameMatch frameMatch = new esport.match.FrameMatch();
-        frameMatch.setVisible(true);
-        frameMatch.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_btnMenuMatchMouseClicked
-
-    private void btnKeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKeluarMouseClicked
-        // TODO add your handling code here:
-        int pilihan = javax.swing.JOptionPane.showConfirmDialog(this, 
-                "Apakah Anda yakin ingin keluar dari aplikasi?", 
-                "Konfirmasi Keluar", 
-                javax.swing.JOptionPane.YES_NO_OPTION);
-            
-        if (pilihan == javax.swing.JOptionPane.YES_OPTION) {
-            System.exit(0); // Menutup seluruh program
-        }
-    }//GEN-LAST:event_btnKeluarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -294,13 +456,26 @@ public class DashboardUtama extends javax.swing.JFrame {
     private javax.swing.JButton btnMenuRegistrasi;
     private javax.swing.JButton btnMenuTim;
     private javax.swing.JButton btnMenuTurnamen;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblJudul;
-    private javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 }
