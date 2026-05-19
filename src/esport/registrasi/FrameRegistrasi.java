@@ -132,105 +132,200 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         dateDaftar = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         cmbTim = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
+        btnSimpan = new javax.swing.JButton();
+        btnUbah = new javax.swing.JButton();
+        btnBatal = new javax.swing.JButton();
+        btnHapus = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableData = new javax.swing.JTable();
-        btnSimpan = new javax.swing.JButton();
-        btnUbah = new javax.swing.JButton();
-        btnHapus = new javax.swing.JButton();
-        btnBatal = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
         btnKembali = new javax.swing.JButton();
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel6.setText("ID Registrasi: ");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 204));
 
-        lblJudul.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        lblJudul.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         lblJudul.setText("REGISTRASI TIM KE TURNAMEN");
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("ID Registrasi            : ");
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Pilih Turnamen         : ");
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Status Bayar             : ");
 
-        jLabel4.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Pilih Tim                   : ");
 
-        jLabel9.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel9.setText("Form Input");
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("Form Registrasi");
 
-        txtIdReg.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        txtIdReg.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtIdReg.addActionListener(this::txtIdRegActionPerformed);
 
-        cmbTurnamen.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        cmbTurnamen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbTurnamen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        cmbBayar.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        cmbBayar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunas", "Pending" }));
+        cmbBayar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cmbBayar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunas", "Belum Lunas" }));
 
-        jLabel5.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Tanggal Daftar          :");
 
-        cmbTim.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        cmbTim.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbTim.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbTim.addActionListener(this::cmbTimActionPerformed);
+
+        jPanel3.setBackground(new java.awt.Color(217, 4, 22));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
+        btnSimpan.setBackground(new java.awt.Color(20, 164, 77));
+        btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSimpan.setForeground(new java.awt.Color(255, 255, 255));
+        btnSimpan.setText("SIMPAN");
+        btnSimpan.setContentAreaFilled(false);
+        btnSimpan.setOpaque(true);
+        btnSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSimpanMouseClicked(evt);
+            }
+        });
+        btnSimpan.addActionListener(this::btnSimpanActionPerformed);
+
+        btnUbah.setBackground(new java.awt.Color(217, 4, 22));
+        btnUbah.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnUbah.setForeground(new java.awt.Color(255, 255, 255));
+        btnUbah.setText("EDIT");
+        btnUbah.setContentAreaFilled(false);
+        btnUbah.setOpaque(true);
+        btnUbah.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUbahMouseClicked(evt);
+            }
+        });
+        btnUbah.addActionListener(this::btnUbahActionPerformed);
+
+        btnBatal.setBackground(new java.awt.Color(0, 0, 0));
+        btnBatal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnBatal.setForeground(new java.awt.Color(255, 255, 255));
+        btnBatal.setText("BATAL");
+        btnBatal.setContentAreaFilled(false);
+        btnBatal.setOpaque(true);
+        btnBatal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBatalMouseClicked(evt);
+            }
+        });
+        btnBatal.addActionListener(this::btnBatalActionPerformed);
+
+        btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHapus.setForeground(new java.awt.Color(217, 4, 22));
+        btnHapus.setText("HAPUS");
+        btnHapus.setContentAreaFilled(false);
+        btnHapus.setOpaque(true);
+        btnHapus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHapusMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dateDaftar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtIdReg)
-                    .addComponent(cmbTurnamen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbBayar, 0, 245, Short.MAX_VALUE)
-                    .addComponent(cmbTim, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cmbBayar, javax.swing.GroupLayout.Alignment.LEADING, 0, 225, Short.MAX_VALUE)
+                                    .addComponent(cmbTim, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbTurnamen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtIdReg, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dateDaftar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnUbah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBatal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnHapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtIdReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)
                         .addComponent(cmbTurnamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)
                         .addComponent(cmbTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)
                         .addComponent(cmbBayar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addGap(20, 20, 20)
                         .addComponent(dateDaftar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel5)))
-                .addGap(151, 151, 151))
+                .addGap(18, 18, 18)
+                .addComponent(btnSimpan)
+                .addGap(18, 18, 18)
+                .addComponent(btnUbah)
+                .addGap(18, 18, 18)
+                .addComponent(btnHapus)
+                .addGap(18, 18, 18)
+                .addComponent(btnBatal)
+                .addGap(18, 18, 18))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnHapus, btnSimpan, btnUbah});
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel10.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         jLabel10.setText("Tabel Data");
@@ -253,54 +348,46 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableData);
 
+        jPanel6.setBackground(new java.awt.Color(217, 4, 22));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(269, 269, 269)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
-                .addGap(20, 20, 20))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel10))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
-        btnSimpan.setText("SIMPAN");
-        btnSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSimpanMouseClicked(evt);
-            }
-        });
-
-        btnUbah.setText("UBAH");
-        btnUbah.addActionListener(this::btnUbahActionPerformed);
-
-        btnHapus.setText("HAPUS");
-        btnHapus.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnHapusMouseClicked(evt);
-            }
-        });
-
-        btnBatal.setText("BATAL");
-        btnBatal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBatalMouseClicked(evt);
-            }
-        });
-        btnBatal.addActionListener(this::btnBatalActionPerformed);
-
+        btnKembali.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKembali.setText("KEMBALI");
         btnKembali.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnKembali.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -310,132 +397,42 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(lblJudul)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(btnKembali, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSimpan)
-                .addGap(18, 18, 18)
-                .addComponent(btnUbah)
-                .addGap(18, 18, 18)
-                .addComponent(btnHapus)
-                .addGap(18, 18, 18)
-                .addComponent(btnBatal)
-                .addGap(18, 18, 18)
-                .addComponent(btnKembali)
-                .addGap(28, 28, 28))
+                .addGap(252, 252, 252)
+                .addComponent(lblJudul)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnBatal, btnHapus, btnKembali, btnSimpan, btnUbah});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(30, 30, 30)
                 .addComponent(lblJudul)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnHapus)
-                        .addComponent(btnBatal)
-                        .addComponent(btnUbah)
-                        .addComponent(btnSimpan))
-                    .addComponent(btnKembali))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(btnKembali)
+                .addGap(19, 19, 19))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnBatal, btnHapus, btnKembali, btnSimpan, btnUbah});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtIdRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdRegActionPerformed
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdRegActionPerformed
-
-    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUbahActionPerformed
-
-    private void cmbTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTimActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbTimActionPerformed
-
-    private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
-        // TODO add your handling code here:
-        String turnamen = cmbTurnamen.getSelectedItem().toString();
-        String tim = cmbTim.getSelectedItem().toString();
-        String statusBayar = cmbBayar.getSelectedItem().toString();
-        
-        if (turnamen.equals("- Pilih Turnamen -") || tim.equals("- Pilih Tim -")) {
-            JOptionPane.showMessageDialog(this, "Pilih Turnamen dan Tim terlebih dahulu!");
-            return;
-        }
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String tglDaftar = sdf.format(dateDaftar.getDate());
-        
-        try {
-            Koneksi kon = new Koneksi();
-            Statement st = kon.conn.createStatement();
-            
-            // Cari ID Turnamen
-            ResultSet rsTurnamen = st.executeQuery("SELECT id_turnamen FROM tb_turnamen WHERE nama_turnamen = '" + turnamen + "'");
-            rsTurnamen.next();
-            String idTurnamen = rsTurnamen.getString("id_turnamen");
-            
-            // Cari ID Tim
-            ResultSet rsTim = st.executeQuery("SELECT id_tim FROM tb_tim WHERE nama_tim = '" + tim + "'");
-            rsTim.next();
-            String idTim = rsTim.getString("id_tim");
-            
-            // Insert Data
-            String sql = "INSERT INTO tb_registrasi (id_turnamen, id_tim, waktu_daftar, status_bayar) " +
-                         "VALUES ('" + idTurnamen + "', '" + idTim + "', '" + tglDaftar + "', '" + statusBayar + "')";
-            st.executeUpdate(sql);
-            
-            JOptionPane.showMessageDialog(null, "Registrasi Berhasil!");
-            tampilData();
-            kosongkanForm();
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Gagal Registrasi: " + e.getMessage());
-        }
-    }//GEN-LAST:event_btnSimpanMouseClicked
-
-    private void tableDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDataMouseClicked
-        // TODO add your handling code here:
-        int baris = tableData.getSelectedRow();
-        if (baris != -1) {
-            txtIdReg.setText(tableData.getValueAt(baris, 0).toString());
-            cmbTurnamen.setSelectedItem(tableData.getValueAt(baris, 1).toString());
-            cmbTim.setSelectedItem(tableData.getValueAt(baris, 2).toString());
-            
-            // Asumsi kolom 3 adalah tanggal (index mulai dari 0)
-            try {
-                java.util.Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)tableData.getValueAt(baris, 3));
-                dateDaftar.setDate(date);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            
-            cmbBayar.setSelectedItem(tableData.getValueAt(baris, 4).toString());
-        }
-    }//GEN-LAST:event_tableDataMouseClicked
+        DashboardUtama dashboard = new DashboardUtama();
+        dashboard.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnKembaliActionPerformed
 
     private void btnHapusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHapusMouseClicked
         // TODO add your handling code here:
@@ -444,14 +441,14 @@ public class FrameRegistrasi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pilih data yang ingin dihapus dari tabel!");
             return;
         }
-        
+
         int confirm = JOptionPane.showConfirmDialog(this, "Yakin hapus data registrasi ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
                 Koneksi kon = new Koneksi();
                 Statement st = kon.conn.createStatement();
                 st.executeUpdate("DELETE FROM tb_registrasi WHERE id_registrasi = '" + id + "'");
-                
+
                 JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus!");
                 tampilData();
                 kosongkanForm();
@@ -461,21 +458,146 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnHapusMouseClicked
 
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBatalActionPerformed
+
     private void btnBatalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatalMouseClicked
         // TODO add your handling code here:
         kosongkanForm();
     }//GEN-LAST:event_btnBatalMouseClicked
 
-    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
         // TODO add your handling code here:
-        DashboardUtama dashboard = new DashboardUtama();
-        dashboard.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnKembaliActionPerformed
+    }//GEN-LAST:event_btnUbahActionPerformed
 
-    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+    private void btnUbahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUbahMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBatalActionPerformed
+    String idReg = txtIdReg.getText();
+    String turnamen = cmbTurnamen.getSelectedItem().toString();
+    String tim = cmbTim.getSelectedItem().toString();
+    String statusBayar = cmbBayar.getSelectedItem().toString();
+
+    // Validasi
+    if (idReg.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Pilih data dari tabel terlebih dahulu!");
+        return;
+    }
+
+    try {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String tglDaftar = sdf.format(dateDaftar.getDate());
+
+        Koneksi kon = new Koneksi();
+        Statement st = kon.conn.createStatement();
+
+        // Cari ID Turnamen
+        ResultSet rsTurnamen = st.executeQuery(
+            "SELECT id_turnamen FROM tb_turnamen WHERE nama_turnamen = '" + turnamen + "'"
+        );
+        rsTurnamen.next();
+        String idTurnamen = rsTurnamen.getString("id_turnamen");
+
+        // Cari ID Tim
+        ResultSet rsTim = st.executeQuery(
+            "SELECT id_tim FROM tb_tim WHERE nama_tim = '" + tim + "'"
+        );
+        rsTim.next();
+        String idTim = rsTim.getString("id_tim");
+
+        // Query UPDATE
+        String sql = "UPDATE tb_registrasi SET "
+                + "id_turnamen = '" + idTurnamen + "', "
+                + "id_tim = '" + idTim + "', "
+                + "waktu_daftar = '" + tglDaftar + "', "
+                + "status_bayar = '" + statusBayar + "' "
+                + "WHERE id_registrasi = '" + idReg + "'";
+
+        st.executeUpdate(sql);
+
+        JOptionPane.showMessageDialog(this, "Data Berhasil Diubah!");
+
+        tampilData();
+        kosongkanForm();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Gagal Mengubah Data : " + e.getMessage());
+    }
+    }//GEN-LAST:event_btnUbahMouseClicked
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
+        // TODO add your handling code here:
+        String turnamen = cmbTurnamen.getSelectedItem().toString();
+        String tim = cmbTim.getSelectedItem().toString();
+        String statusBayar = cmbBayar.getSelectedItem().toString();
+
+        if (turnamen.equals("- Pilih Turnamen -") || tim.equals("- Pilih Tim -")) {
+            JOptionPane.showMessageDialog(this, "Pilih Turnamen dan Tim terlebih dahulu!");
+            return;
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String tglDaftar = sdf.format(dateDaftar.getDate());
+
+        try {
+            Koneksi kon = new Koneksi();
+            Statement st = kon.conn.createStatement();
+
+            // Cari ID Turnamen
+            ResultSet rsTurnamen = st.executeQuery("SELECT id_turnamen FROM tb_turnamen WHERE nama_turnamen = '" + turnamen + "'");
+            rsTurnamen.next();
+            String idTurnamen = rsTurnamen.getString("id_turnamen");
+
+            // Cari ID Tim
+            ResultSet rsTim = st.executeQuery("SELECT id_tim FROM tb_tim WHERE nama_tim = '" + tim + "'");
+            rsTim.next();
+            String idTim = rsTim.getString("id_tim");
+
+            // Insert Data
+            String sql = "INSERT INTO tb_registrasi (id_turnamen, id_tim, waktu_daftar, status_bayar) " +
+            "VALUES ('" + idTurnamen + "', '" + idTim + "', '" + tglDaftar + "', '" + statusBayar + "')";
+            st.executeUpdate(sql);
+
+            JOptionPane.showMessageDialog(null, "Registrasi Berhasil!");
+            tampilData();
+            kosongkanForm();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Gagal Registrasi: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSimpanMouseClicked
+
+    private void cmbTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTimActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTimActionPerformed
+
+    private void txtIdRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdRegActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdRegActionPerformed
+
+    private void tableDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableDataMouseClicked
+        // TODO add your handling code here:
+        int baris = tableData.getSelectedRow();
+        if (baris != -1) {
+            txtIdReg.setText(tableData.getValueAt(baris, 0).toString());
+            cmbTurnamen.setSelectedItem(tableData.getValueAt(baris, 1).toString());
+            cmbTim.setSelectedItem(tableData.getValueAt(baris, 2).toString());
+
+            // Asumsi kolom 3 adalah tanggal (index mulai dari 0)
+            try {
+                java.util.Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String)tableData.getValueAt(baris, 3));
+                dateDaftar.setDate(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            cmbBayar.setSelectedItem(tableData.getValueAt(baris, 4).toString());
+        }
+    }//GEN-LAST:event_tableDataMouseClicked
 
     /**
      * @param args the command line arguments
@@ -499,7 +621,18 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FrameRegistrasi().setVisible(true));
+        try {
+            // Mengubah tema menjadi mirip Windows / OS bawaan
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(FrameRegistrasi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FrameRegistrasi().setVisible(true); // Ganti nama frame-nya sesuai dengan nama file kamu
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -522,6 +655,10 @@ public class FrameRegistrasi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblJudul;
     private javax.swing.JTable tableData;
