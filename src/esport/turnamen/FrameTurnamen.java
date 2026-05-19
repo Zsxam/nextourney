@@ -104,14 +104,17 @@ public class FrameTurnamen extends javax.swing.JFrame {
         cmbGame = new javax.swing.JComboBox<>();
         btnHapus = new javax.swing.JButton();
         btnBatal = new javax.swing.JButton();
-        dateMulai = new com.toedter.calendar.JCalendar();
-        dateSelesai = new com.toedter.calendar.JCalendar();
         btnUbah = new javax.swing.JButton();
         btnSimpan = new javax.swing.JButton();
         cmbStatus = new javax.swing.JComboBox<>();
-        btnKembali = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        dateMulai = new com.toedter.calendar.JDateChooser();
+        dateSelesai = new com.toedter.calendar.JDateChooser();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTurnamen = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        btnKembali = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -125,122 +128,155 @@ public class FrameTurnamen extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 255, 0));
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel1.setText("MASTER DATA TURNAMEN");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("ID Turnamen :");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Nama Turnamen :");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Game :");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Tanggal Mulai :");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Tanggal Selesai :");
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Status :");
 
+        cmbGame.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbGame.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mobile Legend", "Free Fire", "Valorant", "PUBG" }));
         cmbGame.addActionListener(this::cmbGameActionPerformed);
 
+        btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnHapus.setForeground(new java.awt.Color(217, 4, 22));
         btnHapus.setText("HAPUS");
+        btnHapus.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(217, 4, 22)));
+        btnHapus.setContentAreaFilled(false);
+        btnHapus.setMaximumSize(new java.awt.Dimension(72, 27));
+        btnHapus.setMinimumSize(new java.awt.Dimension(72, 27));
+        btnHapus.setOpaque(true);
+        btnHapus.setPreferredSize(new java.awt.Dimension(72, 27));
         btnHapus.addActionListener(this::btnHapusActionPerformed);
 
+        btnBatal.setBackground(new java.awt.Color(0, 0, 0));
+        btnBatal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnBatal.setForeground(new java.awt.Color(255, 255, 255));
         btnBatal.setText("BATAL");
+        btnBatal.setContentAreaFilled(false);
+        btnBatal.setOpaque(true);
         btnBatal.addActionListener(this::btnBatalActionPerformed);
 
-        btnUbah.setText("UBAH");
+        btnUbah.setBackground(new java.awt.Color(217, 4, 22));
+        btnUbah.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUbah.setForeground(new java.awt.Color(255, 255, 255));
+        btnUbah.setText("EDIT");
+        btnUbah.setContentAreaFilled(false);
+        btnUbah.setOpaque(true);
         btnUbah.addActionListener(this::btnUbahActionPerformed);
 
+        btnSimpan.setBackground(new java.awt.Color(20, 164, 77));
+        btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSimpan.setForeground(new java.awt.Color(255, 255, 255));
         btnSimpan.setText("SIMPAN");
+        btnSimpan.setContentAreaFilled(false);
+        btnSimpan.setOpaque(true);
         btnSimpan.addActionListener(this::btnSimpanActionPerformed);
 
+        cmbStatus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendaftaran Buka", "Berjalan", "Selesai", " " }));
 
-        btnKembali.setText("KEMBALI");
-        btnKembali.addActionListener(this::btnKembaliActionPerformed);
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("INPUT TURNAMEN");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel7))
-                        .addGap(36, 36, 36)
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(cmbGame, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(122, 122, 122))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(dateMulai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addComponent(dateSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtNamaTurnamen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                        .addComponent(txtIdTurnamen, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnSimpan)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnUbah)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnHapus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBatal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnKembali)))))
-                .addGap(18, 18, 18))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6))
+                                .addGap(35, 35, 35)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(dateMulai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbGame, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtIdTurnamen)
+                                    .addComponent(txtNamaTurnamen)
+                                    .addComponent(dateSelesai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cmbStatus, 0, 189, Short.MAX_VALUE)))
+                            .addComponent(jLabel9)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnHapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnUbah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSimpan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnBatal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel9)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtIdTurnamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtNamaTurnamen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(cmbGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(dateMulai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(dateMulai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dateSelesai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUbah)
-                    .addComponent(btnBatal)
-                    .addComponent(btnHapus)
-                    .addComponent(btnSimpan)
-                    .addComponent(btnKembali))
-                .addGap(49, 49, 49))
+                .addGap(20, 20, 20)
+                .addComponent(btnSimpan)
+                .addGap(20, 20, 20)
+                .addComponent(btnUbah)
+                .addGap(20, 20, 20)
+                .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(btnBatal))
         );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         tblTurnamen.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -260,6 +296,42 @@ public class FrameTurnamen extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblTurnamen);
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setText("DATA TURNAMEN");
+
+        btnKembali.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnKembali.setText("KEMBALI");
+        btnKembali.addActionListener(this::btnKembaliActionPerformed);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnKembali))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel8)
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnKembali)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -267,140 +339,29 @@ public class FrameTurnamen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(400, 400, 400)
+                        .addGap(200, 200, 200)
                         .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
-        // TODO add your handling code here:
-        try {
-            if (txtIdTurnamen.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Pilih data turnamen di tabel yang akan diubah!");
-                return;
-            }
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String tglMulai = sdf.format(dateMulai.getDate());
-            String tglSelesai = sdf.format(dateSelesai.getDate());
-
-            String sql = "UPDATE tb_turnamen SET nama_turnamen=?, game=?, tgl_mulai=?, tgl_selesai=?, status=? WHERE id_turnamen=?";
-            
-            Koneksi kon = new Koneksi();
-            Connection conn = kon.conn;
-            PreparedStatement pst = conn.prepareStatement(sql);
-
-            pst.setString(1, txtNamaTurnamen.getText());
-            pst.setString(2, cmbGame.getSelectedItem().toString());
-            pst.setString(3, tglMulai);
-            pst.setString(4, tglSelesai);
-            pst.setString(5, cmbStatus.getSelectedItem().toString());
-            pst.setString(6, txtIdTurnamen.getText());
-
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Data Turnamen Berhasil Diubah!");
-
-            loadData();
-            kosongkanForm();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gagal mengubah data: " + e.getMessage());
-        }
-    }//GEN-LAST:event_btnUbahActionPerformed
-
-    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
-        try {
-            if (txtIdTurnamen.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Pilih data turnamen di tabel yang akan dihapus!");
-                return;
-            }
-
-            // Pesan konfirmasi sebelum hapus
-            int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus turnamen ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
-            
-            if (confirm == JOptionPane.YES_OPTION) {
-                String sql = "DELETE FROM tb_turnamen WHERE id_turnamen=?";
-                
-                Koneksi kon = new Koneksi();
-                Connection conn = kon.conn;
-                PreparedStatement pst = conn.prepareStatement(sql);
-
-                pst.setString(1, txtIdTurnamen.getText());
-                pst.executeUpdate();
-                
-                JOptionPane.showMessageDialog(this, "Data Turnamen Berhasil Dihapus!");
-                loadData();
-                kosongkanForm();
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gagal menghapus data: " + e.getMessage());
-        }
-    }//GEN-LAST:event_btnHapusActionPerformed
-
-    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
-        // TODO add your handling code here:
-        kosongkanForm();
-    }//GEN-LAST:event_btnBatalActionPerformed
-
-    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // TODO add your handling code here:
-        try {
-            // Validasi jangan sampai ada yang kosong
-            if (txtNamaTurnamen.getText().isEmpty() || dateMulai.getDate() == null || dateSelesai.getDate() == null) {
-                JOptionPane.showMessageDialog(this, "Harap lengkapi semua data!");
-                return;
-            }
-
-            // Ubah format tanggal dari JDateChooser ke format MySQL (YYYY-MM-DD)
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String tglMulai = sdf.format(dateMulai.getDate());
-            String tglSelesai = sdf.format(dateSelesai.getDate());
-
-            // Query Insert (ID Turnamen tidak dimasukkan karena Auto Increment)
-            String sql = "INSERT INTO tb_turnamen (nama_turnamen, game, tgl_mulai, tgl_selesai, status) VALUES (?, ?, ?, ?, ?)";
-            
-            Koneksi kon = new Koneksi();
-            Connection conn = kon.conn;
-            PreparedStatement pst = conn.prepareStatement(sql);
-
-            pst.setString(1, txtNamaTurnamen.getText());
-            pst.setString(2, cmbGame.getSelectedItem().toString());
-            pst.setString(3, tglMulai);
-            pst.setString(4, tglSelesai);
-            pst.setString(5, cmbStatus.getSelectedItem().toString());
-
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Data Turnamen Berhasil Disimpan!");
-
-            loadData(); // Refresh tabel
-            kosongkanForm(); // Bersihkan form
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage());
-        }
-    }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void tblTurnamenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTurnamenMouseClicked
         // TODO add your handling code here:
@@ -430,10 +391,119 @@ public class FrameTurnamen extends javax.swing.JFrame {
         DashboardUtama dashboard = new DashboardUtama();
         dashboard.setVisible(true);
         dashboard.setLocationRelativeTo(null); // Agar dashboard muncul tepat di tengah layar
-        
+
         // Menutup FrameTurnamen yang sedang terbuka saat ini
         this.dispose();
     }//GEN-LAST:event_btnKembaliActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        // TODO add your handling code here:
+        try {
+            // Validasi jangan sampai ada yang kosong
+            if (txtNamaTurnamen.getText().isEmpty() || dateMulai.getDate() == null || dateSelesai.getDate() == null) {
+                JOptionPane.showMessageDialog(this, "Harap lengkapi semua data!");
+                return;
+            }
+
+            // Ubah format tanggal dari JDateChooser ke format MySQL (YYYY-MM-DD)
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String tglMulai = sdf.format(dateMulai.getDate());
+            String tglSelesai = sdf.format(dateSelesai.getDate());
+
+            // Query Insert (ID Turnamen tidak dimasukkan karena Auto Increment)
+            String sql = "INSERT INTO tb_turnamen (nama_turnamen, game, tgl_mulai, tgl_selesai, status) VALUES (?, ?, ?, ?, ?)";
+
+            Koneksi kon = new Koneksi();
+            Connection conn = kon.conn;
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setString(1, txtNamaTurnamen.getText());
+            pst.setString(2, cmbGame.getSelectedItem().toString());
+            pst.setString(3, tglMulai);
+            pst.setString(4, tglSelesai);
+            pst.setString(5, cmbStatus.getSelectedItem().toString());
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Data Turnamen Berhasil Disimpan!");
+
+            loadData(); // Refresh tabel
+            kosongkanForm(); // Bersihkan form
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (txtIdTurnamen.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Pilih data turnamen di tabel yang akan diubah!");
+                return;
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String tglMulai = sdf.format(dateMulai.getDate());
+            String tglSelesai = sdf.format(dateSelesai.getDate());
+
+            String sql = "UPDATE tb_turnamen SET nama_turnamen=?, game=?, tgl_mulai=?, tgl_selesai=?, status=? WHERE id_turnamen=?";
+
+            Koneksi kon = new Koneksi();
+            Connection conn = kon.conn;
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            pst.setString(1, txtNamaTurnamen.getText());
+            pst.setString(2, cmbGame.getSelectedItem().toString());
+            pst.setString(3, tglMulai);
+            pst.setString(4, tglSelesai);
+            pst.setString(5, cmbStatus.getSelectedItem().toString());
+            pst.setString(6, txtIdTurnamen.getText());
+
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Data Turnamen Berhasil Diubah!");
+
+            loadData();
+            kosongkanForm();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal mengubah data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnUbahActionPerformed
+
+    private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
+        // TODO add your handling code here:
+        kosongkanForm();
+    }//GEN-LAST:event_btnBatalActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (txtIdTurnamen.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Pilih data turnamen di tabel yang akan dihapus!");
+                return;
+            }
+
+            // Pesan konfirmasi sebelum hapus
+            int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus turnamen ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                String sql = "DELETE FROM tb_turnamen WHERE id_turnamen=?";
+
+                Koneksi kon = new Koneksi();
+                Connection conn = kon.conn;
+                PreparedStatement pst = conn.prepareStatement(sql);
+
+                pst.setString(1, txtIdTurnamen.getText());
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(this, "Data Turnamen Berhasil Dihapus!");
+                loadData();
+                kosongkanForm();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal menghapus data: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
 
     private void cmbGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbGameActionPerformed
         // TODO add your handling code here:
@@ -464,8 +534,8 @@ public class FrameTurnamen extends javax.swing.JFrame {
     private javax.swing.JButton btnUbah;
     private javax.swing.JComboBox<String> cmbGame;
     private javax.swing.JComboBox<String> cmbStatus;
-    private com.toedter.calendar.JCalendar dateMulai;
-    private com.toedter.calendar.JCalendar dateSelesai;
+    private com.toedter.calendar.JDateChooser dateMulai;
+    private com.toedter.calendar.JDateChooser dateSelesai;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -474,7 +544,10 @@ public class FrameTurnamen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblTurnamen;
