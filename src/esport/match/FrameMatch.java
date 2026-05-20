@@ -27,17 +27,15 @@ import java.sql.SQLException;
 public class FrameMatch extends javax.swing.JFrame {
     
     Connection conn;
-Statement st;
-ResultSet rs;
-PreparedStatement pst;
+    Statement st;
+    ResultSet rs;
+    PreparedStatement pst;
 
-String idMatch = "";
+    String idMatch = "";
 
-HashMap<String, Integer> mapTurnamen =
-new HashMap<>();
+    HashMap<String, Integer> mapTurnamen = new HashMap<>();
 
-HashMap<String, Integer> mapTim =
-new HashMap<>();
+    HashMap<String, Integer> mapTim = new HashMap<>();
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameMatch.class.getName());
 
@@ -45,27 +43,30 @@ new HashMap<>();
      * Creates new form FrameMatch
      */
     public FrameMatch() {
-    initComponents();
-    
-    koneksi();
-    
-    spWaktu.setValue(new java.util.Date());
-    JSpinner.DateEditor editor =
-    new JSpinner.DateEditor(
-    spWaktu,
-    "dd/MM/yyyy HH:mm"
-    );
+        initComponents();
+        this.setLocationRelativeTo(null);
 
-    spWaktu.setEditor(editor);
-    
-    loadComboTurnamen();
-    loadComboTim();
-    
-    btnUbah.setEnabled(false);
-    btnHapus.setEnabled(false);
-    
-    tampilData();
-    resetForm();
+        koneksi();
+
+        spWaktu.setValue(new java.util.Date());
+        JSpinner.DateEditor editor =
+        new JSpinner.DateEditor(
+        spWaktu,
+        "dd/MM/yyyy HH:mm"
+        );
+
+        spWaktu.setEditor(editor);
+
+        loadComboTurnamen();
+        loadComboTim();
+
+        btnUbah.setEnabled(false);
+        btnUbah.setBackground(new java.awt.Color(153, 153, 153));
+        btnHapus.setEnabled(false);
+        btnHapus.setBackground(new java.awt.Color(153, 153, 153));
+
+        tampilData();
+        resetForm();
     
     }
 
@@ -99,26 +100,31 @@ new HashMap<>();
         btnHapus = new javax.swing.JButton();
         btnBatal = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMatch = new javax.swing.JTable();
         btnKembali = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel16.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel16.setText("MATCH");
+        jLabel16.setText("MANAJEMEN MATCH");
         jLabel16.setToolTipText("");
 
         panelInput3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel17.setText("Turnamen :");
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel17.setText("Turnamen  :");
 
-        jLabel19.setText("Tim A :");
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel19.setText("Tim A        :");
 
-        jLabel20.setText("Tim B :");
+        jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel20.setText("Tim B         :");
 
         cbTurnamen.addActionListener(this::cbTurnamenActionPerformed);
 
@@ -126,14 +132,18 @@ new HashMap<>();
 
         txtBabak.addActionListener(this::txtBabakActionPerformed);
 
-        jLabel11.setText("Babak :");
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("Babak        :");
 
         spWaktu.setModel(new javax.swing.SpinnerDateModel());
 
-        jLabel12.setText("Waktu :");
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel12.setText("Waktu       :");
 
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Skor Tim A :");
 
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setText("Skor Tim B :");
 
         btnSimpan.setBackground(new java.awt.Color(20, 164, 77));
@@ -148,8 +158,8 @@ new HashMap<>();
 
         btnUbah.setBackground(new java.awt.Color(217, 4, 22));
         btnUbah.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnUbah.setForeground(new java.awt.Color(242, 242, 242));
-        btnUbah.setText("UBAH");
+        btnUbah.setForeground(new java.awt.Color(255, 255, 255));
+        btnUbah.setText("EDIT");
         btnUbah.setContentAreaFilled(false);
         btnUbah.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnUbah.setOpaque(true);
@@ -159,7 +169,6 @@ new HashMap<>();
         btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHapus.setForeground(new java.awt.Color(217, 4, 22));
         btnHapus.setText("HAPUS");
-        btnHapus.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(217, 4, 22), 1, true));
         btnHapus.setContentAreaFilled(false);
         btnHapus.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnHapus.setOpaque(true);
@@ -176,55 +185,70 @@ new HashMap<>();
         btnBatal.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnBatal.addActionListener(this::btnBatalActionPerformed);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel2.setText("FORM MATCH");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Form Match");
+
+        jPanel3.setBackground(new java.awt.Color(217, 4, 22));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout panelInput3Layout = new javax.swing.GroupLayout(panelInput3);
         panelInput3.setLayout(panelInput3Layout);
         panelInput3Layout.setHorizontalGroup(
             panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInput3Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelInput3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnBatal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnHapus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUbah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSimpan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(panelInput3Layout.createSequentialGroup()
-                                    .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel20)
-                                            .addComponent(jLabel19)
-                                            .addComponent(jLabel17)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel12))
-                                        .addComponent(jLabel13))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtBabak)
-                                        .addComponent(cbTurnamen, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbTimA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cbTimB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(spWaktu, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
-                                        .addComponent(txtSkorA)))
-                                .addGroup(panelInput3Layout.createSequentialGroup()
-                                    .addComponent(jLabel14)
-                                    .addGap(19, 19, 19)
-                                    .addComponent(txtSkorB)))
-                            .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnBatal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnUbah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnHapus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSimpan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)))
-                        .addGap(12, 12, 12))
-                    .addGroup(panelInput3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(panelInput3Layout.createSequentialGroup()
+                                .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelInput3Layout.createSequentialGroup()
+                                        .addGap(20, 20, 20)
+                                        .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(spWaktu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                                            .addComponent(txtBabak, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbTimB, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cbTimA, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cbTurnamen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtSkorA)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInput3Layout.createSequentialGroup()
+                                        .addGap(19, 19, 19)
+                                        .addComponent(txtSkorB, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(panelInput3Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2)))))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         panelInput3Layout.setVerticalGroup(
             panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelInput3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel2)
+                .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
@@ -268,8 +292,8 @@ new HashMap<>();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel1.setText("TABLE MATCH");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Tabel Data Match");
 
         tblMatch.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -295,389 +319,387 @@ new HashMap<>();
 
         btnKembali.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnKembali.setText("KEMBALI");
-        btnKembali.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         btnKembali.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnKembali.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnKembali.addActionListener(this::btnKembaliActionPerformed);
+
+        jPanel8.setBackground(new java.awt.Color(217, 4, 22));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 20, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(406, Short.MAX_VALUE)
-                .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(438, 438, 438))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(8, 8, 8))))
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnKembali, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnKembali)
-                .addGap(20, 20, 20))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(400, 400, 400)
-                .addComponent(jLabel16))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(panelInput3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(334, 334, 334)
+                .addComponent(jLabel16)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel16)
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelInput3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelInput3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void koneksi(){
-
-    try {
-
-        Koneksi kon = new Koneksi();
-        conn = kon.conn;
-
-    } catch (Exception e){
-
-        JOptionPane.showMessageDialog(null, e);
-
-    }
-
+        try {
+            Koneksi kon = new Koneksi();
+            conn = kon.conn;
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
 
     private void loadComboTurnamen(){
+        try {
+            String sql =
+            "SELECT DISTINCT * FROM tb_turnamen WHERE status = 'Berjalan'";
 
-    try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
 
-        String sql =
-        "SELECT * FROM tb_turnamen";
+            cbTurnamen.removeAllItems();
 
-        st = conn.createStatement();
-        rs = st.executeQuery(sql);
+            while(rs.next()){
 
-        cbTurnamen.removeAllItems();
+                int id = rs.getInt("id_turnamen");
+                String nama = rs.getString("nama_turnamen");
 
-        while(rs.next()){
+                cbTurnamen.addItem(nama);
 
-            int id = rs.getInt("id_turnamen");
-    String nama = rs.getString("nama_turnamen");
+                mapTurnamen.put(nama, id);
 
-    cbTurnamen.addItem(nama);
+            }
 
-    mapTurnamen.put(nama, id);
+        } catch (Exception e){
+
+            JOptionPane.showMessageDialog(null, e);
 
         }
-
-    } catch (Exception e){
-
-        JOptionPane.showMessageDialog(null, e);
-
-    }
-
     }
     
     private void loadComboTim(){
+        try {
 
-    try {
+            String sql =
+            "SELECT DISTINCT * FROM tb_tim";
 
-        String sql =
-        "SELECT * FROM tb_tim";
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
 
-        st = conn.createStatement();
-        rs = st.executeQuery(sql);
+            cbTimA.removeAllItems();
+            cbTimB.removeAllItems();
 
-        cbTimA.removeAllItems();
-        cbTimB.removeAllItems();
+            while(rs.next()){
 
-        while(rs.next()){
+                int id = rs.getInt("id_tim");
+                String nama = rs.getString("nama_tim");
 
-            int id = rs.getInt("id_tim");
-        String nama = rs.getString("nama_tim");
+                cbTimA.addItem(nama);
+                cbTimB.addItem(nama);
 
-        cbTimA.addItem(nama);
-        cbTimB.addItem(nama);
+                mapTim.put(nama, id);
 
-        mapTim.put(nama, id);
+            }
+
+        } catch (Exception e){
+
+            JOptionPane.showMessageDialog(null, e);
 
         }
-
-    } catch (Exception e){
-
-        JOptionPane.showMessageDialog(null, e);
-
-    }
 
     }
     
     private void resetForm(){
-        
-    btnUbah.setEnabled(false);
-    btnHapus.setEnabled(false);    
-    
-    txtBabak.setText("");
-    txtSkorA.setText("");
-    txtSkorB.setText("");
-    spWaktu.setValue(new java.util.Date());
-    tblMatch.clearSelection();
-    idMatch = "";
+        btnUbah.setEnabled(false);
+        btnHapus.setEnabled(false);    
 
-    cbTurnamen.setSelectedIndex(0);
+        txtBabak.setText("");
+        txtSkorA.setText("");
+        txtSkorB.setText("");
+        spWaktu.setValue(new java.util.Date());
+        tblMatch.clearSelection();
+        idMatch = "";
 
+        cbTurnamen.setSelectedIndex(0);
     }
     
     private boolean validasiForm(){
-
-    if(txtBabak.getText().trim().isEmpty()){
-
-        JOptionPane.showMessageDialog(
-            this,
-            "Babak wajib diisi!"
-        );
-
-        return false;
-    }
-
-    if(txtSkorA.getText().trim().isEmpty() ||
-       txtSkorB.getText().trim().isEmpty()){
-
-        JOptionPane.showMessageDialog(
-            this,
-            "Skor wajib diisi!"
-        );
-
-        return false;
-    }
-
-    try {
-
-        int skorA =
-            Integer.parseInt(txtSkorA.getText());
-
-        int skorB =
-            Integer.parseInt(txtSkorB.getText());
-
-        if(skorA < 0 || skorB < 0){
+        if(txtBabak.getText().trim().isEmpty()){
 
             JOptionPane.showMessageDialog(
                 this,
-                "Skor tidak boleh negatif!"
+                "Babak wajib diisi!"
             );
 
             return false;
         }
 
-    } catch(NumberFormatException e){
+        if(txtSkorA.getText().trim().isEmpty() ||
+           txtSkorB.getText().trim().isEmpty()){
 
-        JOptionPane.showMessageDialog(
-            this,
-            "Skor harus berupa angka!"
-        );
+            JOptionPane.showMessageDialog(
+                this,
+                "Skor wajib diisi!"
+            );
 
-        return false;
-    }
+            return false;
+        }
 
-    return true;
+        try {
+
+            int skorA =
+                Integer.parseInt(txtSkorA.getText());
+
+            int skorB =
+                Integer.parseInt(txtSkorB.getText());
+
+            if(skorA < 0 || skorB < 0){
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Skor tidak boleh negatif!"
+                );
+
+                return false;
+            }
+
+        } catch(NumberFormatException e){
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Skor harus berupa angka!"
+            );
+
+            return false;
+        }
+
+        return true;
     }
     
     private void tampilData(){
 
-    DefaultTableModel model =
-        new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel();
 
-    model.addColumn("ID");
-    model.addColumn("Turnamen");
-    model.addColumn("Tim A");
-    model.addColumn("Tim B");
-    model.addColumn("Babak");
-    model.addColumn("Waktu");
-    model.addColumn("Skor A");
-    model.addColumn("Skor B");
+        model.addColumn("ID");
+        model.addColumn("Turnamen");
+        model.addColumn("Tim A");
+        model.addColumn("Tim B");
+        model.addColumn("Babak");
+        model.addColumn("Waktu");
+        model.addColumn("Skor A");
+        model.addColumn("Skor B");
 
-    try {
+        try {
 
-        String sql =
-    "SELECT m.id_match, " +
-    "t.nama_turnamen, " +
-    "ta.nama_tim AS tim_a, " +
-    "tb.nama_tim AS tim_b, " +
-    "m.babak, " +
-    "m.waktu_tanding, " +
-    "m.skor_tim_a, " +
-    "m.skor_tim_b " +
-    "FROM tb_match m " +
-    "JOIN tb_turnamen t ON m.id_turnamen = t.id_turnamen " +
-    "JOIN tb_tim ta ON m.id_tim_a = ta.id_tim " +
-    "JOIN tb_tim tb ON m.id_tim_b = tb.id_tim";
+            String sql =
+                "SELECT m.id_match, " +
+                "t.nama_turnamen, " +
+                "ta.nama_tim AS tim_a, " +
+                "tb.nama_tim AS tim_b, " +
+                "m.babak, " +
+                "m.waktu_tanding, " +
+                "m.skor_tim_a, " +
+                "m.skor_tim_b " +
+                "FROM tb_match m " +
+                "JOIN tb_turnamen t ON m.id_turnamen = t.id_turnamen " +
+                "JOIN tb_tim ta ON m.id_tim_a = ta.id_tim " +
+                "JOIN tb_tim tb ON m.id_tim_b = tb.id_tim";
 
-        st = conn.createStatement();
-        rs = st.executeQuery(sql);
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
 
-        while(rs.next()){
+            while(rs.next()){
 
-           model.addRow(new Object[]{
+               model.addRow(new Object[]{
 
-        rs.getString("id_match"),
-        rs.getString("nama_turnamen"),
-        rs.getString("tim_a"),
-        rs.getString("tim_b"),
-        rs.getString("babak"),
-        rs.getString("waktu_tanding"),
-        rs.getString("skor_tim_a"),
-        rs.getString("skor_tim_b")
+            rs.getString("id_match"),
+            rs.getString("nama_turnamen"),
+            rs.getString("tim_a"),
+            rs.getString("tim_b"),
+            rs.getString("babak"),
+            rs.getString("waktu_tanding"),
+            rs.getString("skor_tim_a"),
+            rs.getString("skor_tim_b")
 
-        });
+            });
 
+            }
+
+            tblMatch.setModel(model);
+
+        } catch (SQLException e){
+            JOptionPane.showMessageDialog(null, e);
         }
-
-        tblMatch.setModel(model);
-
-    } catch (SQLException e){
-
-        JOptionPane.showMessageDialog(null, e);
-
-    }
 
     }
     
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
         if(!validasiForm()){
-    return;
-}
-    try {
+            return;
+        }
+        try {
 
-        // Validasi ComboBox
-        if(cbTurnamen.getSelectedItem() == null ||
-           cbTimA.getSelectedItem() == null ||
-           cbTimB.getSelectedItem() == null){
+            // Validasi ComboBox
+            if(cbTurnamen.getSelectedItem() == null ||
+               cbTimA.getSelectedItem() == null ||
+               cbTimB.getSelectedItem() == null){
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Data turnamen atau tim belum tersedia!"
+                );
+
+                return;
+            }
+
+            // Ambil ID dari ComboBox
+            String turnamen =
+                cbTurnamen.getSelectedItem().toString();
+
+            String timA =
+                cbTimA.getSelectedItem().toString();
+
+            String timB =
+                cbTimB.getSelectedItem().toString();
+
+            int idTurnamen =
+            mapTurnamen.get(turnamen);
+
+            int idTimA =
+            mapTim.get(timA);
+
+            int idTimB =
+            mapTim.get(timB);
+
+            // Validasi tim
+            if(idTimA == idTimB){
+
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Tim A dan Tim B tidak boleh sama!"
+                );
+
+                return;
+            }
+
+            // Validasi skor
+            int skorA =
+                Integer.parseInt(txtSkorA.getText());
+
+            int skorB =
+                Integer.parseInt(txtSkorB.getText());
+
+            // Query SQL
+            String sql =
+            "INSERT INTO tb_match "
+            + "(id_turnamen,id_tim_a,id_tim_b,"
+            + "babak,waktu_tanding,"
+            + "skor_tim_a,skor_tim_b) "
+            + "VALUES (?,?,?,?,?,?,?)";
+
+            pst = conn.prepareStatement(sql);
+
+            pst.setInt(1, idTurnamen);
+            pst.setInt(2, idTimA);
+            pst.setInt(3, idTimB);
+
+            pst.setString(4, txtBabak.getText());
+
+            // Ambil waktu dari spinner
+            java.util.Date waktu =
+                (java.util.Date) spWaktu.getValue();
+
+            pst.setTimestamp(
+                5,
+                new java.sql.Timestamp(
+                    waktu.getTime()
+                )
+            );
+
+            pst.setInt(6, skorA);
+            pst.setInt(7, skorB);
+
+            pst.executeUpdate();
 
             JOptionPane.showMessageDialog(
                 this,
-                "Data turnamen atau tim belum tersedia!"
+                "Data Match Berhasil Disimpan"
             );
 
-            return;
-        }
+            tampilData();
+            resetForm();
 
-        // Ambil ID dari ComboBox
-        String turnamen =
-            cbTurnamen.getSelectedItem().toString();
-
-        String timA =
-            cbTimA.getSelectedItem().toString();
-
-        String timB =
-            cbTimB.getSelectedItem().toString();
-
-        int idTurnamen =
-        mapTurnamen.get(turnamen);
-
-        int idTimA =
-        mapTim.get(timA);
-
-        int idTimB =
-        mapTim.get(timB);
-
-        // Validasi tim
-        if(idTimA == idTimB){
+        } catch (NumberFormatException e){
 
             JOptionPane.showMessageDialog(
                 this,
-                "Tim A dan Tim B tidak boleh sama!"
+                 e.getMessage()
             );
 
-            return;
+        } catch (Exception e){
+
+            JOptionPane.showMessageDialog(
+                this,
+                e
+            );
+
         }
-
-        // Validasi skor
-        int skorA =
-            Integer.parseInt(txtSkorA.getText());
-
-        int skorB =
-            Integer.parseInt(txtSkorB.getText());
-
-        // Query SQL
-        String sql =
-        "INSERT INTO tb_match "
-        + "(id_turnamen,id_tim_a,id_tim_b,"
-        + "babak,waktu_tanding,"
-        + "skor_tim_a,skor_tim_b) "
-        + "VALUES (?,?,?,?,?,?,?)";
-
-        pst = conn.prepareStatement(sql);
-
-        pst.setInt(1, idTurnamen);
-        pst.setInt(2, idTimA);
-        pst.setInt(3, idTimB);
-
-        pst.setString(4, txtBabak.getText());
-
-        // Ambil waktu dari spinner
-        java.util.Date waktu =
-            (java.util.Date) spWaktu.getValue();
-
-        pst.setTimestamp(
-            5,
-            new java.sql.Timestamp(
-                waktu.getTime()
-            )
-        );
-
-        pst.setInt(6, skorA);
-        pst.setInt(7, skorB);
-
-        pst.executeUpdate();
-
-        JOptionPane.showMessageDialog(
-            this,
-            "Data Match Berhasil Disimpan"
-        );
-
-        tampilData();
-        resetForm();
-
-    } catch (NumberFormatException e){
-
-        JOptionPane.showMessageDialog(
-            this,
-             e.getMessage()
-        );
-
-    } catch (Exception e){
-
-        JOptionPane.showMessageDialog(
-            this,
-            e
-        );
-
-    }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
@@ -827,6 +849,13 @@ new HashMap<>();
 
         idMatch = "";
         tblMatch.clearSelection();
+        
+        btnSimpan.setEnabled(true);
+        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); // [20,164,77]
+        btnUbah.setEnabled(false);
+        btnUbah.setBackground(new java.awt.Color(153, 153, 153));
+        btnHapus.setEnabled(false);
+        btnHapus.setBackground(new java.awt.Color(153, 153, 153));
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void cbTurnamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTurnamenActionPerformed
@@ -851,8 +880,12 @@ new HashMap<>();
 
     private void tblMatchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMatchMouseClicked
         // TODO add your handling code here:
+        btnSimpan.setEnabled(false);
         btnUbah.setEnabled(true);
         btnHapus.setEnabled(true);
+        btnSimpan.setBackground(new java.awt.Color(153, 153, 153));
+        btnUbah.setBackground(new java.awt.Color(217, 4, 22)); // [217,4,22]
+        btnHapus.setBackground(new java.awt.Color(255, 255, 255));
 
         try {
 
@@ -953,6 +986,12 @@ new HashMap<>();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelInput3;
     private javax.swing.JSpinner spWaktu;

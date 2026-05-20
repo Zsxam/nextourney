@@ -91,7 +91,7 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         try {
             Koneksi kon = new Koneksi();
             Statement st = kon.conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT nama_tim FROM tb_tim ORDER BY nama_tim ASC");
+            ResultSet rs = st.executeQuery("SELECT DISTINCT nama_tim FROM tb_tim ORDER BY nama_tim ASC");
             while (rs.next()) {
                 cmbTim.addItem(rs.getString("nama_tim"));
             }
@@ -170,6 +170,7 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setText("Form Registrasi");
 
+        txtIdReg.setEditable(false);
         txtIdReg.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtIdReg.addActionListener(this::txtIdRegActionPerformed);
 
@@ -275,8 +276,8 @@ public class FrameRegistrasi extends javax.swing.JFrame {
                                     .addComponent(cmbBayar, javax.swing.GroupLayout.Alignment.LEADING, 0, 225, Short.MAX_VALUE)
                                     .addComponent(cmbTim, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cmbTurnamen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtIdReg, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dateDaftar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(dateDaftar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtIdReg, javax.swing.GroupLayout.Alignment.LEADING)))
                             .addComponent(btnUbah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnBatal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,8 +328,8 @@ public class FrameRegistrasi extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel10.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel10.setText("Tabel Data");
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("Tabel Data Registrasi");
 
         tableData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -400,7 +401,7 @@ public class FrameRegistrasi extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnKembali, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -413,15 +414,15 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addComponent(lblJudul)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(btnKembali)
-                .addGap(19, 19, 19))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -465,6 +466,9 @@ public class FrameRegistrasi extends javax.swing.JFrame {
     private void btnBatalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatalMouseClicked
         // TODO add your handling code here:
         kosongkanForm();
+        
+        btnSimpan.setEnabled(true);
+        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); // [20,164,77]
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
@@ -586,6 +590,7 @@ public class FrameRegistrasi extends javax.swing.JFrame {
             txtIdReg.setText(tableData.getValueAt(baris, 0).toString());
             cmbTurnamen.setSelectedItem(tableData.getValueAt(baris, 1).toString());
             cmbTim.setSelectedItem(tableData.getValueAt(baris, 2).toString());
+            cmbBayar.setSelectedItem(tableData.getValueAt(baris, 4).toString());
 
             // Asumsi kolom 3 adalah tanggal (index mulai dari 0)
             try {
@@ -595,7 +600,9 @@ public class FrameRegistrasi extends javax.swing.JFrame {
                 e.printStackTrace();
             }
 
-            cmbBayar.setSelectedItem(tableData.getValueAt(baris, 4).toString());
+            
+            btnSimpan.setEnabled(false);
+            btnSimpan.setBackground(new java.awt.Color(153, 153, 153));
         }
     }//GEN-LAST:event_tableDataMouseClicked
 
@@ -656,8 +663,6 @@ public class FrameRegistrasi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblJudul;
