@@ -102,24 +102,24 @@ public class FramePemain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         jLabel1.setText("MANAJEMEN ROASTER PEMAIN");
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel6.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("ID Pemain");
 
-        jLabel7.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Tim Asal");
 
-        jLabel8.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Nickname");
 
-        jLabel9.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Role Pemain");
 
-        jLabel11.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Nama Asli");
 
         txtNickname.addActionListener(this::txtNicknameActionPerformed);
@@ -130,7 +130,7 @@ public class FramePemain extends javax.swing.JFrame {
         cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "JUNGLER", "ROAMER", "GOLD LANER", "EXP LANER", "MID LANER", " " }));
         cmbRole.addActionListener(this::cmbRoleActionPerformed);
 
-        tblPemain.setFont(new java.awt.Font("Verdana", 0, 13)); // NOI18N
+        tblPemain.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblPemain.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -150,9 +150,11 @@ public class FramePemain extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblPemain);
 
         btnSimpan.setBackground(new java.awt.Color(0, 204, 102));
-        btnSimpan.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
+        btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSimpan.setForeground(new java.awt.Color(255, 255, 255));
         btnSimpan.setText("SIMPAN");
+        btnSimpan.setContentAreaFilled(false);
+        btnSimpan.setOpaque(true);
         btnSimpan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSimpanMouseClicked(evt);
@@ -160,20 +162,24 @@ public class FramePemain extends javax.swing.JFrame {
         });
 
         btnUbah.setBackground(new java.awt.Color(217, 4, 22));
-        btnUbah.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
+        btnUbah.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnUbah.setForeground(new java.awt.Color(255, 255, 255));
         btnUbah.setText("UBAH");
+        btnUbah.setContentAreaFilled(false);
+        btnUbah.setOpaque(true);
         btnUbah.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnUbahMouseClicked(evt);
             }
         });
 
-        btnHapus.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
+        btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnHapus.setForeground(new java.awt.Color(217, 4, 22));
         btnHapus.setText("HAPUS");
         btnHapus.setBorder(null);
         btnHapus.setBorderPainted(false);
+        btnHapus.setContentAreaFilled(false);
+        btnHapus.setOpaque(true);
         btnHapus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnHapusMouseClicked(evt);
@@ -182,9 +188,11 @@ public class FramePemain extends javax.swing.JFrame {
         btnHapus.addActionListener(this::btnHapusActionPerformed);
 
         btnBatal.setBackground(new java.awt.Color(0, 0, 0));
-        btnBatal.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
+        btnBatal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnBatal.setForeground(new java.awt.Color(255, 255, 255));
         btnBatal.setText("BATAL");
+        btnBatal.setContentAreaFilled(false);
+        btnBatal.setOpaque(true);
         btnBatal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnBatalMouseClicked(evt);
@@ -192,7 +200,7 @@ public class FramePemain extends javax.swing.JFrame {
         });
         btnBatal.addActionListener(this::btnBatalActionPerformed);
 
-        btnKembali.setFont(new java.awt.Font("Verdana", 1, 13)); // NOI18N
+        btnKembali.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnKembali.setLabel("KEMBALI\n");
         btnKembali.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -201,10 +209,10 @@ public class FramePemain extends javax.swing.JFrame {
         });
         btnKembali.addActionListener(this::btnKembaliActionPerformed);
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel3.setText("FORM ROASTER PEMAIN");
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel2.setText("TABEL ROASTER PEMAIN");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -228,9 +236,7 @@ public class FramePemain extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jLabel3)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -241,13 +247,11 @@ public class FramePemain extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtNamaAsli, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(cmbTim, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtIdPemain, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(0, 0, Short.MAX_VALUE)))))))
+                                            .addComponent(cmbTim, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtIdPemain, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(47, 47, 47)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -299,7 +303,6 @@ public class FramePemain extends javax.swing.JFrame {
                 .addContainerGap(154, Short.MAX_VALUE))
         );
 
-        jLabel2.getAccessibleContext().setAccessibleName("TABEL ROASTER PEMAIN");
         jLabel2.getAccessibleContext().setAccessibleDescription("");
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
@@ -318,7 +321,7 @@ public class FramePemain extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -547,7 +550,18 @@ public class FramePemain extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FramePemain().setVisible(true));
+        try {
+            // Mengubah tema menjadi mirip Windows / OS bawaan
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(FramePemain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FramePemain().setVisible(true); // Ganti nama frame-nya sesuai dengan nama file kamu
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
