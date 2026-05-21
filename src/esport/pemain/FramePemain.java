@@ -7,6 +7,7 @@ package esport.pemain;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import esport.config.Koneksi; // Sesuaikan dengan lokasi file koneksimu
@@ -16,23 +17,49 @@ import esport.config.Koneksi; // Sesuaikan dengan lokasi file koneksimu
  */
 public class FramePemain extends javax.swing.JFrame {
     
+    Connection conn;
+    Statement st;
+    ResultSet rs;
+    PreparedStatement pst;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FramePemain.class.getName());
+    
+    public FramePemain() {
+        initComponents();
+        java.awt.Image icon = java.awt.Toolkit.getDefaultToolkit().getImage(getClass().getResource("/esport/img/logo.png"));
+        this.setIconImage(icon);
+        this.setLocationRelativeTo(null); // Biar posisi di tengah layar
+    
+        koneksi();
+        tampilData();   // Panggil tabel
+        loadComboTim();
+        loadComboRole();
+        kosongkanForm();
+    }
+    
+    private void koneksi() {
+        try {
+            Koneksi kon = new Koneksi();
+            conn = kon.conn;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Koneksi Database Gagal: " + e.getMessage());
+        }
+    }
+    
     private void tampilData() {
         Object header[] = {"ID Pemain", "Tim Asal", "Nickname", "Role", "Nama Asli"};
         DefaultTableModel data = new DefaultTableModel(null, header);
         tblPemain.setModel(data);
 
-
         try {
-            Koneksi kon = new Koneksi();
-            Statement st = kon.conn.createStatement();
+            st = conn.createStatement();
 
             // QUERY JOIN: Menggabungkan tb_pemain dan tb_tim
             String sql = "SELECT p.id_pemain, t.nama_tim, p.nickname, p.role_pemain, p.nama_asli " +
                          "FROM tb_pemain p JOIN tb_tim t ON p.id_tim = t.id_tim " +
                          "ORDER BY p.id_pemain DESC";
 
-            ResultSet rs = st.executeQuery(sql);
+            rs = st.executeQuery(sql);
 
             while (rs.next()) {
                 data.addRow(new Object[]{
@@ -45,7 +72,84 @@ public class FramePemain extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Gagal Tampil Data: " + e.getMessage());
+        } finally {
+            try { 
+                if (rs != null) 
+                    rs.close(); 
+                if (st != null) 
+                    st.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
+    }
+    
+    private void loadComboTim() {
+        cmbTim.removeAllItems(); // Kosongkan dulu isi combobox
+        cmbTim.addItem("- Pilih Tim -"); // Opsi default
+
+        try {
+            st = conn.createStatement();
+            String sql = "SELECT DISTINCT nama_tim FROM tb_tim ORDER BY nama_tim ASC";
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                cmbTim.addItem(rs.getString("nama_tim"));
+            }
+        } catch (Exception e) {
+            System.out.println("Gagal Load Combo: " + e.getMessage());
+        } finally {
+            try { 
+                if (rs != null) 
+                    rs.close(); 
+                if (st != null) 
+                    st.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
+        }
+    }
+    
+    private void loadComboRole() {
+        cmbRole.removeAllItems(); // Kosongkan dulu isi combobox
+        cmbRole.addItem("- Pilih Role -"); // Opsi default
+
+        try {
+            st = conn.createStatement();
+            String sql = "SELECT DISTINCT role_pemain FROM tb_pemain ORDER BY role_pemain ASC";
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                cmbRole.addItem(rs.getString("role_pemain"));
+            }
+        } catch (Exception e) {
+            System.out.println("Gagal Load Combo: " + e.getMessage());
+        } finally {
+            try { 
+                if (rs != null) 
+                    rs.close(); 
+                if (st != null) 
+                    st.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
+        }
+    }
+    
+    private boolean validasiForm() {
+        if (cmbTim.getSelectedItem() == null || cmbTim.getSelectedItem().toString().equals("- Pilih Tim -")) {
+            JOptionPane.showMessageDialog(this, "Pilih Tim Asal terlebih dahulu!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if (cmbRole.getSelectedItem() == null || cmbRole.getSelectedItem().toString().equals("- Pilih Role -")) {
+            JOptionPane.showMessageDialog(this, "Pilih Role Pemain terlebih dahulu!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if (txtNickname.getText().trim().isEmpty() || txtNamaAsli.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nickname dan Nama Asli tidak boleh kosong!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     private void kosongkanForm() {
@@ -54,19 +158,18 @@ public class FramePemain extends javax.swing.JFrame {
         txtNickname.setText("");
         cmbRole.setSelectedIndex(0);
         txtNamaAsli.setText("");
+        
+        btnSimpan.setEnabled(true);
+        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); 
+        btnUbah.setEnabled(false);
+        btnUbah.setBackground(new java.awt.Color(153, 153, 153));
+        btnHapus.setEnabled(false);
+        btnHapus.setBackground(new java.awt.Color(153, 153, 153));
     }
     /**
      * Creates new form FramePemain
      */
-    public FramePemain() {
-        initComponents();
-        this.setLocationRelativeTo(null); // Biar posisi di tengah layar
-    
-        tampilData();   // Panggil tabel
-        loadComboTim();
-        loadComboRole();
-        
-    }       
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,6 +206,7 @@ public class FramePemain extends javax.swing.JFrame {
         btnKembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Manajemen Roster Nextourney");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -395,9 +499,6 @@ public class FramePemain extends javax.swing.JFrame {
     private void btnBatalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatalMouseClicked
         // TODO add your handling code here:
         kosongkanForm();
-        
-        btnSimpan.setEnabled(true);
-        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); // [20,164,77]
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
@@ -417,8 +518,7 @@ public class FramePemain extends javax.swing.JFrame {
 
         if (konfirmasi == JOptionPane.YES_OPTION) {
             try {
-                Koneksi kon = new Koneksi();
-                java.sql.Statement st = kon.conn.createStatement();
+                st = conn.createStatement();
                 String sql = "DELETE FROM tb_pemain WHERE id_pemain = '" + id + "'";
                 st.executeUpdate(sql);
 
@@ -428,34 +528,39 @@ public class FramePemain extends javax.swing.JFrame {
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Gagal Menghapus: " + e.getMessage());
+            } finally {
+                try {
+                    if (st != null) 
+                        st.close(); 
+                } catch (Exception e) {
+                    System.out.println("Gagal menutup resource: " + e.getMessage());
+                }
             }
         }
     }//GEN-LAST:event_btnHapusMouseClicked
 
     private void btnUbahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUbahMouseClicked
         // TODO add your handling code here:
+        if (txtIdPemain.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Pilih data di tabel terlebih dahulu!");
+            return;
+        }
+        if (!validasiForm()) { 
+            return;
+        }
+        
         String id = txtIdPemain.getText();
         String namaTimDipilih = cmbTim.getSelectedItem().toString();
         String nickname = txtNickname.getText();
         String role = cmbRole.getSelectedItem().toString();
         String namaAsli = txtNamaAsli.getText();
 
-        if (id.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Pilih data di tabel terlebih dahulu!");
-            return;
-        }
-        if (namaTimDipilih.equals("- Pilih Tim -") || nickname.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Data tidak boleh kosong!");
-            return;
-        }
-
         try {
-            Koneksi kon = new Koneksi();
-            java.sql.Statement st = kon.conn.createStatement();
+            st = conn.createStatement();
 
             // 1. Cari id_tim yang baru berdasarkan combobox
             String cariIdTim = "SELECT id_tim FROM tb_tim WHERE nama_tim = '" + namaTimDipilih + "'";
-            java.sql.ResultSet rs = st.executeQuery(cariIdTim);
+            rs = st.executeQuery(cariIdTim);
 
             if (rs.next()) {
                 String idTimBaru = rs.getString("id_tim");
@@ -476,28 +581,35 @@ public class FramePemain extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal Mengubah: " + e.getMessage());
+        } finally {
+            try { 
+                if (rs != null) 
+                    rs.close(); 
+                if (st != null) 
+                    st.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
     }//GEN-LAST:event_btnUbahMouseClicked
 
     private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
         // TODO add your handling code here:
+        if (!validasiForm()) {
+            return;
+        }
+        
         String namaTimDipilih = cmbTim.getSelectedItem().toString();
         String nickname = txtNickname.getText();
         String role = cmbRole.getSelectedItem().toString();
         String namaAsli = txtNamaAsli.getText();
 
-        if (namaTimDipilih.equals("- Pilih Tim -") || nickname.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Pilih tim dan isi nickname terlebih dahulu!");
-            return;
-        }
-
         try {
-            Koneksi kon = new Koneksi();
-            Statement st = kon.conn.createStatement();
+            st = conn.createStatement();
 
             // 1. Cari id_tim berdasarkan nama_tim yang dipilih di ComboBox
             String cariIdTim = "SELECT id_tim FROM tb_tim WHERE nama_tim = '" + namaTimDipilih + "'";
-            ResultSet rs = st.executeQuery(cariIdTim);
+            rs = st.executeQuery(cariIdTim);
 
             if (rs.next()) {
                 String idTim = rs.getString("id_tim");
@@ -510,11 +622,20 @@ public class FramePemain extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Data Pemain Berhasil Disimpan!");
 
                 tampilData(); // Refresh tabel
-                // Opsional: Buat method kosongkanForm() dan panggil di sini
+                kosongkanForm();
             }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Gagal Simpan: " + e.getMessage());
+        } finally {
+            try { 
+                if (rs != null) 
+                    rs.close(); 
+                if (st != null) 
+                    st.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
     }//GEN-LAST:event_btnSimpanMouseClicked
 
@@ -531,7 +652,11 @@ public class FramePemain extends javax.swing.JFrame {
             txtNamaAsli.setText(tblPemain.getValueAt(baris, 4).toString());
             
             btnSimpan.setEnabled(false);
-            btnSimpan.setBackground(new java.awt.Color(153, 153, 153));
+            btnSimpan.setBackground(new java.awt.Color(153, 153, 153)); // Abu-abu
+            btnUbah.setEnabled(true);
+            btnUbah.setBackground(new java.awt.Color(217, 4, 22)); // Merah
+            btnHapus.setEnabled(true);
+            btnHapus.setBackground(new java.awt.Color(255, 255, 255)); // Putih
         }
     }//GEN-LAST:event_tblPemainMouseClicked
 
@@ -556,41 +681,7 @@ public class FramePemain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUbahActionPerformed
 
-    private void loadComboTim() {
-        cmbTim.removeAllItems(); // Kosongkan dulu isi combobox
-        cmbTim.addItem("- Pilih Tim -"); // Opsi default
-
-        try {
-            Koneksi kon = new Koneksi();
-            java.sql.Statement st = kon.conn.createStatement();
-            String sql = "SELECT DISTINCT nama_tim FROM tb_tim ORDER BY nama_tim ASC";
-            java.sql.ResultSet rs = st.executeQuery(sql);
-
-            while (rs.next()) {
-                cmbTim.addItem(rs.getString("nama_tim"));
-            }
-        } catch (Exception e) {
-            System.out.println("Gagal Load Combo: " + e.getMessage());
-        }
-    }
     
-    private void loadComboRole() {
-        cmbRole.removeAllItems(); // Kosongkan dulu isi combobox
-        cmbRole.addItem("- Pilih Role -"); // Opsi default
-
-        try {
-            Koneksi kon = new Koneksi();
-            java.sql.Statement st = kon.conn.createStatement();
-            String sql = "SELECT DISTINCT role_pemain FROM tb_pemain ORDER BY role_pemain ASC";
-            java.sql.ResultSet rs = st.executeQuery(sql);
-
-            while (rs.next()) {
-                cmbRole.addItem(rs.getString("role_pemain"));
-            }
-        } catch (Exception e) {
-            System.out.println("Gagal Load Combo: " + e.getMessage());
-        }
-    }
     
     
     /**

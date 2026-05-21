@@ -21,6 +21,11 @@ import esport.main.DashboardUtama;
  */
 public class FrameTurnamen extends javax.swing.JFrame {
     
+    Connection conn;
+    Statement stm;
+    ResultSet res;
+    PreparedStatement pst;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameTurnamen.class.getName());
 
     /**
@@ -28,9 +33,21 @@ public class FrameTurnamen extends javax.swing.JFrame {
      */
     public FrameTurnamen() {
         initComponents();
+        java.awt.Image icon = java.awt.Toolkit.getDefaultToolkit().getImage(getClass().getResource("/esport/img/logo.png"));
+        this.setIconImage(icon);
+        koneksi();
         loadData(); // Menampilkan data tabel saat frame dibuka
         kosongkanForm(); // Memastikan form bersih saat frame dibuka
         txtIdTurnamen.setEditable(false); // Kunci text field ID karena Auto Increment
+    }
+    
+    private void koneksi() {
+        try {
+            Koneksi kon = new Koneksi();
+            conn = kon.conn;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Koneksi Database Gagal: " + e.getMessage());
+        }
     }
     
     private void kosongkanForm() {
@@ -42,7 +59,45 @@ public class FrameTurnamen extends javax.swing.JFrame {
         // Mengembalikan JDateChooser ke tanggal saat ini (hari ini)
         dateMulai.setDate(new java.util.Date());
         dateSelesai.setDate(new java.util.Date());
+        
+        btnSimpan.setEnabled(true);
+        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); 
+        btnUbah.setEnabled(false);
+        btnUbah.setBackground(new java.awt.Color(153, 153, 153));
+        btnHapus.setEnabled(false);
+        btnHapus.setBackground(new java.awt.Color(153, 153, 153));
     }
+    
+    private boolean validasiForm() {
+    // 1. Validasi Nama Turnamen kosong
+    if (txtNamaTurnamen.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Nama Turnamen tidak boleh kosong!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        txtNamaTurnamen.requestFocus(); // Mengarahkan kursor ke textfield
+        return false;
+    }
+
+    // 2. Validasi Tanggal kosong (belum dipilih)
+    if (dateMulai.getDate() == null) {
+        JOptionPane.showMessageDialog(this, "Tanggal Mulai harus dipilih!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        return false;
+    }
+    
+    if (dateSelesai.getDate() == null) {
+        JOptionPane.showMessageDialog(this, "Tanggal Selesai harus dipilih!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        return false;
+    }
+
+    // 3. Validasi Logika Tanggal
+    java.util.Date tglMulai = dateMulai.getDate();
+    java.util.Date tglSelesai = dateSelesai.getDate();
+
+    if (tglMulai.after(tglSelesai)) {
+        JOptionPane.showMessageDialog(this, "Tanggal Selesai tidak boleh sebelum Tanggal Mulai!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        return false; // Hentikan proses
+    }
+
+    return true; // Jika lolos semua pengecekan, kembalikan nilai true
+}
 
     // Method untuk menarik data dari database ke Tabel JTable
     private void loadData() {
@@ -53,16 +108,11 @@ public class FrameTurnamen extends javax.swing.JFrame {
         model.addColumn("Tanggal Mulai");
         model.addColumn("Tanggal Selesai");
         model.addColumn("Status");
-
+        
+        String sql = "SELECT * FROM tb_turnamen";
         try {
-            String sql = "SELECT * FROM tb_turnamen";
-            
-            // Memanggil koneksi sesuai gaya codingmu di Koneksi.java
-            Koneksi kon = new Koneksi(); 
-            Connection conn = kon.conn;
-            
-            Statement stm = conn.createStatement();
-            ResultSet res = stm.executeQuery(sql);
+            stm = conn.createStatement();
+            res = stm.executeQuery(sql);
 
             while (res.next()) {
                 model.addRow(new Object[]{
@@ -77,6 +127,13 @@ public class FrameTurnamen extends javax.swing.JFrame {
             tblTurnamen.setModel(model); // Pastikan nama variabel tabel kamu 'tblTurnamen'
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal memuat data: " + e.getMessage());
+        } finally {
+            try {
+                if (res != null) res.close();
+                if (stm != null) stm.close();
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
     }
 
@@ -130,6 +187,7 @@ public class FrameTurnamen extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Manajemen Turnamen Nextoourney");
         setBackground(new java.awt.Color(51, 255, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -419,6 +477,10 @@ public class FrameTurnamen extends javax.swing.JFrame {
             }
             btnSimpan.setEnabled(false);
             btnSimpan.setBackground(new java.awt.Color(153, 153, 153));
+            btnUbah.setEnabled(true);
+            btnUbah.setBackground(new java.awt.Color(217, 4, 22)); 
+            btnHapus.setEnabled(true);
+            btnHapus.setBackground(new java.awt.Color(255, 255, 255));
         }
     }//GEN-LAST:event_tblTurnamenMouseClicked
 
@@ -435,13 +497,15 @@ public class FrameTurnamen extends javax.swing.JFrame {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
+        // Validasi jangan sampai ada yang kosong
+        if (txtNamaTurnamen.getText().isEmpty() || dateMulai.getDate() == null || dateSelesai.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Harap lengkapi semua data!");
+            return;
+        }
+        if (!validasiForm()) {
+            return;
+        }
         try {
-            // Validasi jangan sampai ada yang kosong
-            if (txtNamaTurnamen.getText().isEmpty() || dateMulai.getDate() == null || dateSelesai.getDate() == null) {
-                JOptionPane.showMessageDialog(this, "Harap lengkapi semua data!");
-                return;
-            }
-
             // Ubah format tanggal dari JDateChooser ke format MySQL (YYYY-MM-DD)
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String tglMulai = sdf.format(dateMulai.getDate());
@@ -450,9 +514,7 @@ public class FrameTurnamen extends javax.swing.JFrame {
             // Query Insert (ID Turnamen tidak dimasukkan karena Auto Increment)
             String sql = "INSERT INTO tb_turnamen (nama_turnamen, game, tgl_mulai, tgl_selesai, status) VALUES (?, ?, ?, ?, ?)";
 
-            Koneksi kon = new Koneksi();
-            Connection conn = kon.conn;
-            PreparedStatement pst = conn.prepareStatement(sql);
+            pst = conn.prepareStatement(sql);
 
             pst.setString(1, txtNamaTurnamen.getText());
             pst.setString(2, cmbGame.getSelectedItem().toString());
@@ -468,16 +530,21 @@ public class FrameTurnamen extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal menyimpan data: " + e.getMessage());
+        } finally {
+            try { if (pst != null) pst.close(); } catch (Exception e) {}
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
         // TODO add your handling code here:
+        if (txtIdTurnamen.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Pilih data turnamen di tabel yang akan diubah!");
+            return;
+        }
+        if (!validasiForm()) {
+            return;
+        }
         try {
-            if (txtIdTurnamen.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Pilih data turnamen di tabel yang akan diubah!");
-                return;
-            }
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String tglMulai = sdf.format(dateMulai.getDate());
@@ -485,9 +552,7 @@ public class FrameTurnamen extends javax.swing.JFrame {
 
             String sql = "UPDATE tb_turnamen SET nama_turnamen=?, game=?, tgl_mulai=?, tgl_selesai=?, status=? WHERE id_turnamen=?";
 
-            Koneksi kon = new Koneksi();
-            Connection conn = kon.conn;
-            PreparedStatement pst = conn.prepareStatement(sql);
+            pst = conn.prepareStatement(sql);
 
             pst.setString(1, txtNamaTurnamen.getText());
             pst.setString(2, cmbGame.getSelectedItem().toString());
@@ -504,34 +569,30 @@ public class FrameTurnamen extends javax.swing.JFrame {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal mengubah data: " + e.getMessage());
+        } finally {
+            try { if (pst != null) pst.close(); } catch (Exception e) {}
         }
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
         // TODO add your handling code here:
         kosongkanForm();
-        
-        btnSimpan.setEnabled(true);
-        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); // [20,164,77]
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
+        if (txtIdTurnamen.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Pilih data turnamen di tabel yang akan dihapus!");
+            return;
+        }
         try {
-            if (txtIdTurnamen.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Pilih data turnamen di tabel yang akan dihapus!");
-                return;
-            }
-
             // Pesan konfirmasi sebelum hapus
             int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus turnamen ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
 
             if (confirm == JOptionPane.YES_OPTION) {
                 String sql = "DELETE FROM tb_turnamen WHERE id_turnamen=?";
 
-                Koneksi kon = new Koneksi();
-                Connection conn = kon.conn;
-                PreparedStatement pst = conn.prepareStatement(sql);
+                pst = conn.prepareStatement(sql);
 
                 pst.setString(1, txtIdTurnamen.getText());
                 pst.executeUpdate();
@@ -542,6 +603,8 @@ public class FrameTurnamen extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal menghapus data: " + e.getMessage());
+        } finally {
+            try { if (pst != null) pst.close(); } catch (Exception e) {}
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
@@ -588,8 +651,6 @@ public class FrameTurnamen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JProgressBar jProgressBar1;

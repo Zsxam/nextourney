@@ -44,6 +44,8 @@ public class FrameMatch extends javax.swing.JFrame {
      */
     public FrameMatch() {
         initComponents();
+        java.awt.Image icon = java.awt.Toolkit.getDefaultToolkit().getImage(getClass().getResource("/esport/img/logo.png"));
+        this.setIconImage(icon);
         this.setLocationRelativeTo(null);
 
         koneksi();
@@ -109,6 +111,7 @@ public class FrameMatch extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Manajemen Match Nextourney");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -209,37 +212,36 @@ public class FrameMatch extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnBatal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnHapus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUbah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSimpan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelInput3Layout.createSequentialGroup()
-                                .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelInput3Layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(spWaktu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                                            .addComponent(txtBabak, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cbTimB, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cbTimA, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(cbTurnamen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txtSkorA)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInput3Layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(txtSkorB, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(panelInput3Layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)))))
+                    .addComponent(btnHapus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUbah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSimpan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelInput3Layout.createSequentialGroup()
+                            .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelInput3Layout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addGroup(panelInput3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(spWaktu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                                        .addComponent(txtBabak, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cbTimB, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbTimA, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cbTurnamen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtSkorA)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInput3Layout.createSequentialGroup()
+                                    .addGap(19, 19, 19)
+                                    .addComponent(txtSkorB, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(panelInput3Layout.createSequentialGroup()
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel2))))
                 .addGap(0, 20, Short.MAX_VALUE))
         );
         panelInput3Layout.setVerticalGroup(
@@ -429,6 +431,13 @@ public class FrameMatch extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, e);
 
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
     }
     
@@ -460,13 +469,24 @@ public class FrameMatch extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, e);
 
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
 
     }
     
     private void resetForm(){
         btnUbah.setEnabled(false);
-        btnHapus.setEnabled(false);    
+        btnHapus.setEnabled(false);
+        btnSimpan.setEnabled(true);
+        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); // [20,164,77]
+        btnUbah.setBackground(new java.awt.Color(153, 153, 153));
+        btnHapus.setBackground(new java.awt.Color(153, 153, 153));
 
         txtBabak.setText("");
         txtSkorA.setText("");
@@ -584,6 +604,13 @@ public class FrameMatch extends javax.swing.JFrame {
 
         } catch (SQLException e){
             JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
 
     }
@@ -699,98 +726,110 @@ public class FrameMatch extends javax.swing.JFrame {
                 e
             );
 
+        } finally {
+            try {
+                if (pst != null) pst.close();
+            } catch (Exception e) {
+                System.out.println("Gagal menutup pst: " + e.getMessage());
+            }
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
         // TODO add your handling code here:
         if(!validasiForm()){
-    return;
-}
-         try {
-
-        if(idMatch.equals("")){
-
-            JOptionPane.showMessageDialog(
-                this,
-                "Pilih data pada tabel terlebih dahulu!"
-            );
-
             return;
         }
+        try {
 
-        int idTurnamen =
-        mapTurnamen.get(
-        cbTurnamen.getSelectedItem().toString()
-    );
+            if(idMatch.equals("")){
 
-        int idTimA =
-        mapTim.get(
-        cbTimA.getSelectedItem().toString()
-    );
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Pilih data pada tabel terlebih dahulu!"
+                );
 
-        int idTimB =
-        mapTim.get(
-        cbTimB.getSelectedItem().toString()
-    );
-        String sql =
-        "UPDATE tb_match SET "
-        + "id_turnamen=?, "
-        + "id_tim_a=?, "
-        + "id_tim_b=?, "
-        + "babak=?, "
-        + "waktu_tanding=?, "
-        + "skor_tim_a=?, "
-        + "skor_tim_b=? "
-        + "WHERE id_match=?";
+                return;
+            }
 
-        pst = conn.prepareStatement(sql);
+            int idTurnamen =
+                mapTurnamen.get(
+                cbTurnamen.getSelectedItem().toString()
+            );
 
-        pst.setInt(1, idTurnamen);
-        pst.setInt(2, idTimA);
-        pst.setInt(3, idTimB);
+                int idTimA =
+                mapTim.get(
+                cbTimA.getSelectedItem().toString()
+            );
 
-        pst.setString(4, txtBabak.getText());
+                int idTimB =
+                mapTim.get(
+                cbTimB.getSelectedItem().toString()
+            );
+                String sql =
+                "UPDATE tb_match SET "
+                + "id_turnamen=?, "
+                + "id_tim_a=?, "
+                + "id_tim_b=?, "
+                + "babak=?, "
+                + "waktu_tanding=?, "
+                + "skor_tim_a=?, "
+                + "skor_tim_b=? "
+                + "WHERE id_match=?";
 
-        java.util.Date waktu =
-            (java.util.Date) spWaktu.getValue();
+                pst = conn.prepareStatement(sql);
 
-        pst.setTimestamp(
-            5,
-            new java.sql.Timestamp(
-                waktu.getTime()
-            )
-        );
+                pst.setInt(1, idTurnamen);
+                pst.setInt(2, idTimA);
+                pst.setInt(3, idTimB);
 
-        pst.setInt(
-            6,
-            Integer.parseInt(txtSkorA.getText())
-        );
+                pst.setString(4, txtBabak.getText());
 
-        pst.setInt(
-            7,
-            Integer.parseInt(txtSkorB.getText())
-        );
+                java.util.Date waktu =
+                    (java.util.Date) spWaktu.getValue();
 
-        pst.setString(8, idMatch);
+                pst.setTimestamp(
+                    5,
+                    new java.sql.Timestamp(
+                        waktu.getTime()
+                    )
+                );
 
-        pst.executeUpdate();
+                pst.setInt(
+                    6,
+                    Integer.parseInt(txtSkorA.getText())
+                );
 
-        JOptionPane.showMessageDialog(
-            this,
-            "Data berhasil diubah"
-        );
+                pst.setInt(
+                    7,
+                    Integer.parseInt(txtSkorB.getText())
+                );
 
-        tampilData();
-        resetForm();
+                pst.setString(8, idMatch);
 
-        idMatch = "";
+                pst.executeUpdate();
 
-    } catch (Exception e){
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Data berhasil diubah"
+                );
 
-        JOptionPane.showMessageDialog(this, e);
+                tampilData();
+                resetForm();
 
-    }
+                idMatch = "";
+
+        } catch (Exception e){
+
+            JOptionPane.showMessageDialog(this, e);
+
+        } finally {
+            try {
+                if (pst != null) pst.close();
+            } catch (Exception e) {
+                System.out.println("Gagal menutup pst: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
@@ -836,6 +875,12 @@ public class FrameMatch extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(this, e);
 
+            } finally {
+                try {
+                    if (pst != null) pst.close();
+                } catch (Exception e) {
+                    System.out.println("Gagal menutup pst: " + e.getMessage());
+                }
             }
 
         }
@@ -849,13 +894,6 @@ public class FrameMatch extends javax.swing.JFrame {
 
         idMatch = "";
         tblMatch.clearSelection();
-        
-        btnSimpan.setEnabled(true);
-        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); // [20,164,77]
-        btnUbah.setEnabled(false);
-        btnUbah.setBackground(new java.awt.Color(153, 153, 153));
-        btnHapus.setEnabled(false);
-        btnHapus.setBackground(new java.awt.Color(153, 153, 153));
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void cbTurnamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTurnamenActionPerformed
@@ -987,10 +1025,6 @@ public class FrameMatch extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelInput3;

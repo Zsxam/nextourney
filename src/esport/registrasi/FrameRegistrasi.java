@@ -8,6 +8,7 @@ package esport.registrasi;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
@@ -19,6 +20,11 @@ import esport.main.DashboardUtama;
  */
 public class FrameRegistrasi extends javax.swing.JFrame {
     
+    Connection conn;
+    Statement st;
+    ResultSet rs;
+    PreparedStatement pst;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameRegistrasi.class.getName());
 
     /**
@@ -26,12 +32,23 @@ public class FrameRegistrasi extends javax.swing.JFrame {
      */
     public FrameRegistrasi() {
         initComponents();
+        java.awt.Image icon = java.awt.Toolkit.getDefaultToolkit().getImage(getClass().getResource("/esport/img/logo.png"));
+        this.setIconImage(icon);
         this.setLocationRelativeTo(null);
         
-        // Panggil method ini
+        koneksi();
         tampilData();
         loadComboTurnamen();
         loadComboTim();
+    }
+    
+    private void koneksi() {
+        try {
+            Koneksi kon = new Koneksi();
+            conn = kon.conn;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Koneksi Database Gagal: " + e.getMessage());
+        }
     }
     
     // 1. Method untuk menampilkan data ke jTable1 (JOIN 3 Tabel)
@@ -41,8 +58,7 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         tableData.setModel(data);
         
         try {
-            Koneksi kon = new Koneksi();
-            Statement st = kon.conn.createStatement();
+            st = conn.createStatement();
             
             // Query JOIN 3 tabel
             String sql = "SELECT r.id_registrasi, t.nama_turnamen, tm.nama_tim, r.waktu_daftar, r.status_bayar " +
@@ -51,7 +67,7 @@ public class FrameRegistrasi extends javax.swing.JFrame {
                          "JOIN tb_tim tm ON r.id_tim = tm.id_tim " +
                          "ORDER BY r.id_registrasi DESC";
                          
-            ResultSet rs = st.executeQuery(sql);
+            rs = st.executeQuery(sql);
             
             while (rs.next()) {
                 data.addRow(new Object[]{
@@ -64,6 +80,15 @@ public class FrameRegistrasi extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Gagal Tampil Data: " + e.getMessage());
+        } finally {
+            try { 
+                if (rs != null) 
+                    rs.close(); 
+                if (st != null) 
+                    st.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
     }
 
@@ -72,15 +97,23 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         cmbTurnamen.removeAllItems();
         cmbTurnamen.addItem("- Pilih Turnamen -");
         try {
-            Koneksi kon = new Koneksi();
-            Statement st = kon.conn.createStatement();
+            st = conn.createStatement();
             // Hanya tampilkan turnamen yang statusnya pendaftaran buka
-            ResultSet rs = st.executeQuery("SELECT nama_turnamen FROM tb_turnamen WHERE status = 'Pendaftaran Buka'");
+            rs = st.executeQuery("SELECT nama_turnamen FROM tb_turnamen WHERE status = 'Pendaftaran Buka'");
             while (rs.next()) {
                 cmbTurnamen.addItem(rs.getString("nama_turnamen"));
             }
         } catch (Exception e) {
             System.out.println("Error load turnamen: " + e.getMessage());
+        } finally {
+            try { 
+                if (rs != null) 
+                    rs.close(); 
+                if (st != null) 
+                    st.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
     }
 
@@ -89,15 +122,36 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         cmbTim.removeAllItems();
         cmbTim.addItem("- Pilih Tim -");
         try {
-            Koneksi kon = new Koneksi();
-            Statement st = kon.conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT DISTINCT nama_tim FROM tb_tim ORDER BY nama_tim ASC");
+            st = conn.createStatement();
+            rs = st.executeQuery("SELECT DISTINCT nama_tim FROM tb_tim ORDER BY nama_tim ASC");
             while (rs.next()) {
                 cmbTim.addItem(rs.getString("nama_tim"));
             }
         } catch (Exception e) {
             System.out.println("Error load tim: " + e.getMessage());
+        } finally {
+            try { 
+                if (rs != null) 
+                    rs.close(); 
+                if (st != null) 
+                    st.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
+    }
+    
+    private boolean validasiForm() {
+        if (cmbTurnamen.getSelectedItem().toString().equals("- Pilih Turnamen -") || 
+            cmbTim.getSelectedItem().toString().equals("- Pilih Tim -")) {
+            JOptionPane.showMessageDialog(this, "Pilih Turnamen dan Tim terlebih dahulu!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        if (dateDaftar.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Tanggal daftar harus dipilih!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     // 4. Method untuk mereset inputan form
@@ -107,6 +161,13 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         cmbTim.setSelectedIndex(0);
         cmbBayar.setSelectedIndex(0);
         dateDaftar.setDate(null);
+        
+        btnSimpan.setEnabled(true);
+        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); // Hijau
+        btnUbah.setEnabled(false);
+        btnUbah.setBackground(new java.awt.Color(153, 153, 153)); // Abu-abu
+        btnHapus.setEnabled(false);
+        btnHapus.setBackground(new java.awt.Color(153, 153, 153)); // Abu-abu
     }
 
     /**
@@ -148,6 +209,7 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         jLabel6.setText("ID Registrasi: ");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registrasi Tim ke Turnamen");
         setBackground(new java.awt.Color(204, 204, 204));
 
         lblJudul.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
@@ -446,16 +508,24 @@ public class FrameRegistrasi extends javax.swing.JFrame {
         int confirm = JOptionPane.showConfirmDialog(this, "Yakin hapus data registrasi ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
-                Koneksi kon = new Koneksi();
-                Statement st = kon.conn.createStatement();
-                st.executeUpdate("DELETE FROM tb_registrasi WHERE id_registrasi = '" + id + "'");
+                String sql = "DELETE FROM tb_registrasi WHERE id_registrasi = ?";
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, id);
+                pst.executeUpdate();
 
                 JOptionPane.showMessageDialog(this, "Data Berhasil Dihapus!");
                 tampilData();
                 kosongkanForm();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Gagal Menghapus: " + e.getMessage());
+            } finally {
+            try { 
+                if (pst != null) 
+                    pst.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
             }
+        }
         }
     }//GEN-LAST:event_btnHapusMouseClicked
 
@@ -466,9 +536,6 @@ public class FrameRegistrasi extends javax.swing.JFrame {
     private void btnBatalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBatalMouseClicked
         // TODO add your handling code here:
         kosongkanForm();
-        
-        btnSimpan.setEnabled(true);
-        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); // [20,164,77]
     }//GEN-LAST:event_btnBatalMouseClicked
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
@@ -477,56 +544,61 @@ public class FrameRegistrasi extends javax.swing.JFrame {
 
     private void btnUbahMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUbahMouseClicked
         // TODO add your handling code here:
-    String idReg = txtIdReg.getText();
-    String turnamen = cmbTurnamen.getSelectedItem().toString();
-    String tim = cmbTim.getSelectedItem().toString();
-    String statusBayar = cmbBayar.getSelectedItem().toString();
+        if (txtIdReg.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Pilih data dari tabel terlebih dahulu!");
+            return;
+        }
+        if (!validasiForm()) return;
 
-    // Validasi
-    if (idReg.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Pilih data dari tabel terlebih dahulu!");
-        return;
-    }
+        String idReg = txtIdReg.getText();
+        String turnamen = cmbTurnamen.getSelectedItem().toString();
+        String tim = cmbTim.getSelectedItem().toString();
+        String statusBayar = cmbBayar.getSelectedItem().toString();
 
-    try {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String tglDaftar = sdf.format(dateDaftar.getDate());
 
-        Koneksi kon = new Koneksi();
-        Statement st = kon.conn.createStatement();
+        try {
+            st = conn.createStatement();
 
-        // Cari ID Turnamen
-        ResultSet rsTurnamen = st.executeQuery(
-            "SELECT id_turnamen FROM tb_turnamen WHERE nama_turnamen = '" + turnamen + "'"
-        );
-        rsTurnamen.next();
-        String idTurnamen = rsTurnamen.getString("id_turnamen");
+            // Cari ID Turnamen
+            rs = st.executeQuery("SELECT id_turnamen FROM tb_turnamen WHERE nama_turnamen = '" + turnamen + "'");
+            rs.next();
+            String idTurnamen = rs.getString("id_turnamen");
 
-        // Cari ID Tim
-        ResultSet rsTim = st.executeQuery(
-            "SELECT id_tim FROM tb_tim WHERE nama_tim = '" + tim + "'"
-        );
-        rsTim.next();
-        String idTim = rsTim.getString("id_tim");
+            // Cari ID Tim
+            rs = st.executeQuery("SELECT id_tim FROM tb_tim WHERE nama_tim = '" + tim + "'");
+            rs.next();
+            String idTim = rs.getString("id_tim");
 
-        // Query UPDATE
-        String sql = "UPDATE tb_registrasi SET "
-                + "id_turnamen = '" + idTurnamen + "', "
-                + "id_tim = '" + idTim + "', "
-                + "waktu_daftar = '" + tglDaftar + "', "
-                + "status_bayar = '" + statusBayar + "' "
-                + "WHERE id_registrasi = '" + idReg + "'";
+            // Query UPDATE dengan PreparedStatement
+            String sql = "UPDATE tb_registrasi SET id_turnamen=?, id_tim=?, waktu_daftar=?, status_bayar=? WHERE id_registrasi=?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, idTurnamen);
+            pst.setString(2, idTim);
+            pst.setString(3, tglDaftar);
+            pst.setString(4, statusBayar);
+            pst.setString(5, idReg);
 
-        st.executeUpdate(sql);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Data Berhasil Diubah!");
+            tampilData();
+            kosongkanForm();
 
-        JOptionPane.showMessageDialog(this, "Data Berhasil Diubah!");
-
-        tampilData();
-        kosongkanForm();
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Gagal Mengubah Data : " + e.getMessage());
-    }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Gagal Mengubah Data : " + e.getMessage());
+        } finally {
+            try { 
+                if (rs != null) 
+                    rs.close(); 
+                if (st != null) 
+                    st.close(); 
+                if (pst != null) 
+                    pst.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_btnUbahMouseClicked
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
@@ -535,43 +607,54 @@ public class FrameRegistrasi extends javax.swing.JFrame {
 
     private void btnSimpanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSimpanMouseClicked
         // TODO add your handling code here:
+        if (!validasiForm()) return;
+
         String turnamen = cmbTurnamen.getSelectedItem().toString();
         String tim = cmbTim.getSelectedItem().toString();
         String statusBayar = cmbBayar.getSelectedItem().toString();
-
-        if (turnamen.equals("- Pilih Turnamen -") || tim.equals("- Pilih Tim -")) {
-            JOptionPane.showMessageDialog(this, "Pilih Turnamen dan Tim terlebih dahulu!");
-            return;
-        }
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String tglDaftar = sdf.format(dateDaftar.getDate());
 
         try {
-            Koneksi kon = new Koneksi();
-            Statement st = kon.conn.createStatement();
-
+            st = conn.createStatement();
+            
             // Cari ID Turnamen
-            ResultSet rsTurnamen = st.executeQuery("SELECT id_turnamen FROM tb_turnamen WHERE nama_turnamen = '" + turnamen + "'");
-            rsTurnamen.next();
-            String idTurnamen = rsTurnamen.getString("id_turnamen");
+            rs = st.executeQuery("SELECT id_turnamen FROM tb_turnamen WHERE nama_turnamen = '" + turnamen + "'");
+            rs.next();
+            String idTurnamen = rs.getString("id_turnamen");
 
             // Cari ID Tim
-            ResultSet rsTim = st.executeQuery("SELECT id_tim FROM tb_tim WHERE nama_tim = '" + tim + "'");
-            rsTim.next();
-            String idTim = rsTim.getString("id_tim");
+            rs = st.executeQuery("SELECT id_tim FROM tb_tim WHERE nama_tim = '" + tim + "'");
+            rs.next();
+            String idTim = rs.getString("id_tim");
 
-            // Insert Data
-            String sql = "INSERT INTO tb_registrasi (id_turnamen, id_tim, waktu_daftar, status_bayar) " +
-            "VALUES ('" + idTurnamen + "', '" + idTim + "', '" + tglDaftar + "', '" + statusBayar + "')";
-            st.executeUpdate(sql);
-
+            // Insert Data dengan PreparedStatement
+            String sql = "INSERT INTO tb_registrasi (id_turnamen, id_tim, waktu_daftar, status_bayar) VALUES (?, ?, ?, ?)";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, idTurnamen);
+            pst.setString(2, idTim);
+            pst.setString(3, tglDaftar);
+            pst.setString(4, statusBayar);
+            
+            pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registrasi Berhasil!");
             tampilData();
             kosongkanForm();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Gagal Registrasi: " + e.getMessage());
+        } finally {
+            try { 
+                if (rs != null) 
+                    rs.close(); 
+                if (st != null) 
+                    st.close(); 
+                if (pst != null) 
+                    pst.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
     }//GEN-LAST:event_btnSimpanMouseClicked
 
@@ -603,6 +686,10 @@ public class FrameRegistrasi extends javax.swing.JFrame {
             
             btnSimpan.setEnabled(false);
             btnSimpan.setBackground(new java.awt.Color(153, 153, 153));
+            btnUbah.setEnabled(true);
+            btnUbah.setBackground(new java.awt.Color(217, 4, 22)); // Merah
+            btnHapus.setEnabled(true);
+            btnHapus.setBackground(new java.awt.Color(255, 255, 255)); // Putih
         }
     }//GEN-LAST:event_tableDataMouseClicked
 

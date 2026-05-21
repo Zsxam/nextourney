@@ -19,6 +19,8 @@ public class DashboardUtama extends javax.swing.JFrame {
      */
     public DashboardUtama() {
         initComponents();
+        java.awt.Image icon = java.awt.Toolkit.getDefaultToolkit().getImage(getClass().getResource("/esport/img/logo.png"));
+        this.setIconImage(icon);
         this.setLocationRelativeTo(null);
     }
 

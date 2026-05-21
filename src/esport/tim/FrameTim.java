@@ -19,6 +19,11 @@ import esport.main.DashboardUtama;
  */
 public class FrameTim extends javax.swing.JFrame {
     
+    Connection conn;
+    Statement st;
+    ResultSet rs;
+    PreparedStatement pst;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrameTim.class.getName());
 
     /**
@@ -26,9 +31,33 @@ public class FrameTim extends javax.swing.JFrame {
      */
     public FrameTim() {
         initComponents();
-        this.setLocationRelativeTo(null); // Biar di tengah layar
+        java.awt.Image icon = java.awt.Toolkit.getDefaultToolkit().getImage(getClass().getResource("/esport/img/logo.png"));
+        this.setIconImage(icon);
+        this.setLocationRelativeTo(null); 
+        koneksi();
         tampilData();
         kosongkanForm();
+    }
+    
+    private void koneksi() {
+        try {
+            Koneksi kon = new Koneksi();
+            conn = kon.conn;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Koneksi Database Gagal: " + e.getMessage());
+        }
+    }
+    
+    private boolean validasiForm() {
+        if (txtNamaTim.getText().trim().isEmpty() || 
+            txtAsalDaerah.getText().trim().isEmpty() || 
+            txtNamaKapten.getText().trim().isEmpty() || 
+            txtNoWa.getText().trim().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Harap lengkapi semua kolom data tim!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+        return true;
     }
     
     private void kosongkanForm() {
@@ -38,6 +67,13 @@ public class FrameTim extends javax.swing.JFrame {
         txtNamaKapten.setText("");
         txtNoWa.setText("");
         txtNamaTim.requestFocus();
+        
+        btnSimpan.setEnabled(true);
+        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); // Hijau
+        btnUbah.setEnabled(false);
+        btnUbah.setBackground(new java.awt.Color(153, 153, 153)); // Abu-abu
+        btnHapus.setEnabled(false);
+        btnHapus.setBackground(new java.awt.Color(153, 153, 153)); // Abu-abu
     }
 
     private void tampilData() {
@@ -49,11 +85,9 @@ public class FrameTim extends javax.swing.JFrame {
         model.addColumn("No. WhatsApp");
         
         try {
-            Koneksi kon = new Koneksi();
-            Connection k = kon.conn;
-            Statement stat = k.createStatement();
+            st = conn.createStatement();
             String sql = "SELECT * FROM tb_tim ORDER BY id_tim DESC";
-            ResultSet rs = stat.executeQuery(sql);
+            rs = st.executeQuery(sql);
             
             while (rs.next()) {
                 model.addRow(new Object[]{
@@ -67,6 +101,13 @@ public class FrameTim extends javax.swing.JFrame {
             tblTim.setModel(model);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Gagal Menampilkan Data: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
     }
 
@@ -105,6 +146,7 @@ public class FrameTim extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Manajemen Tim Nextourey");
         setMinimumSize(new java.awt.Dimension(900, 600));
         setPreferredSize(new java.awt.Dimension(900, 600));
 
@@ -189,29 +231,28 @@ public class FrameTim extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(panelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBatal, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
-                    .addGroup(panelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnHapus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUbah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSimpan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(panelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelInputLayout.createSequentialGroup()
-                                .addGroup(panelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(20, 20, 20)
-                                .addGroup(panelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtNamaKapten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                                    .addComponent(txtAsalDaerah, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNamaTim, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtIdTim, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNoWa)))
-                            .addGroup(panelInputLayout.createSequentialGroup()
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel9)))))
+                    .addComponent(btnHapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnUbah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSimpan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelInputLayout.createSequentialGroup()
+                            .addGroup(panelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel1))
+                            .addGap(20, 20, 20)
+                            .addGroup(panelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtNamaKapten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                                .addComponent(txtAsalDaerah, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNamaTim, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtIdTim, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNoWa)))
+                        .addGroup(panelInputLayout.createSequentialGroup()
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel9))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         panelInputLayout.setVerticalGroup(
@@ -387,18 +428,16 @@ public class FrameTim extends javax.swing.JFrame {
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
         // TODO add your handling code here:
         kosongkanForm();
-        
-        btnSimpan.setEnabled(true);
-        btnSimpan.setBackground(new java.awt.Color(20, 164, 77)); // [20,164,77]
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
+        if (!validasiForm()) {
+            return; 
+        }
         try {
-            Koneksi kon = new Koneksi();
-            Connection k = kon.conn;
             String sql = "INSERT INTO tb_tim (nama_tim, asal_daerah, nama_kapten, no_wa) VALUES (?, ?, ?, ?)";
-            PreparedStatement pst = k.prepareStatement(sql);
+            pst = conn.prepareStatement(sql);
             
             pst.setString(1, txtNamaTim.getText());
             pst.setString(2, txtAsalDaerah.getText());
@@ -411,18 +450,27 @@ public class FrameTim extends javax.swing.JFrame {
             kosongkanForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Gagal Menyimpan: " + e.getMessage());
+        } finally {
+            try { 
+                if (pst != null) 
+                    pst.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
+        if (txtIdTim.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Pilih data tim di tabel yang akan dihapus!");
+            return;
+        }
         int konfirmasi = JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus Tim ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (konfirmasi == JOptionPane.YES_OPTION) {
             try {
-                Koneksi kon = new Koneksi();
-                Connection k = kon.conn;
                 String sql = "DELETE FROM tb_tim WHERE id_tim=?";
-                PreparedStatement pst = k.prepareStatement(sql);
+                pst = conn.prepareStatement(sql);
                 pst.setString(1, txtIdTim.getText());
                 
                 pst.execute();
@@ -431,17 +479,29 @@ public class FrameTim extends javax.swing.JFrame {
                 kosongkanForm();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Gagal Menghapus: " + e.getMessage());
+            } finally {
+                try { 
+                    if (pst != null) 
+                        pst.close(); 
+                } catch (Exception e) {
+                    System.out.println("Gagal menutup resource: " + e.getMessage());
+                }
             }
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
         // TODO add your handling code here:
+        if (txtIdTim.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Pilih data tim di tabel yang akan diubah!");
+            return;
+        }
+        if (!validasiForm()) {
+            return; 
+        }
         try {
-            Koneksi kon = new Koneksi();
-            Connection k = kon.conn;
             String sql = "UPDATE tb_tim SET nama_tim=?, asal_daerah=?, nama_kapten=?, no_wa=? WHERE id_tim=?";
-            PreparedStatement pst = k.prepareStatement(sql);
+            pst = conn.prepareStatement(sql);
             
             pst.setString(1, txtNamaTim.getText());
             pst.setString(2, txtAsalDaerah.getText());
@@ -455,6 +515,13 @@ public class FrameTim extends javax.swing.JFrame {
             kosongkanForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Gagal Mengubah: " + e.getMessage());
+        } finally {
+            try { 
+                if (pst != null) 
+                    pst.close(); 
+            } catch (Exception e) {
+                System.out.println("Gagal menutup resource: " + e.getMessage());
+            }
         }
     }//GEN-LAST:event_btnUbahActionPerformed
 
@@ -470,6 +537,10 @@ public class FrameTim extends javax.swing.JFrame {
             
             btnSimpan.setEnabled(false);
             btnSimpan.setBackground(new java.awt.Color(153, 153, 153));
+            btnUbah.setEnabled(true);
+            btnUbah.setBackground(new java.awt.Color(217, 4, 22)); // Merah
+            btnHapus.setEnabled(true);
+            btnHapus.setBackground(new java.awt.Color(255, 255, 255)); // Putih
         }
     }//GEN-LAST:event_tblTimMouseClicked
 
